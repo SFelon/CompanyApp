@@ -4,7 +4,7 @@ databaseChangeLog:
       author: sfelon
       changes:
       - createTable:
-            tableName: exam
+            tableName: users
             columns:
             - column:
                   name: id
@@ -14,12 +14,81 @@ databaseChangeLog:
                       primaryKey: true
                       nullable: false
             - column:
-                  name: title
-                  type: varchar(50)
+                  name: name
+                  type: varchar(40)
                   constraints:
                       nullable: false
             - column:
-                  name: description
-                  type: varchar(512)
+                  name: username
+                  type: varchar(15)
                   constraints:
                       nullable: false
+                      unique: true
+                      uniqueConstraintName: uk_users_username
+            - column:
+                name: email
+                type: varchar(40)
+                constraints:
+                      nullable: false
+                      unique: true
+                      uniqueConstraintName: uk_users_email
+            - column:
+                name: password
+                type: varchar(75)
+                constraints:
+                     nullable: false
+      - createTable:
+            tableName: roles
+            columns:
+            - column:
+                name: id
+                type: bigserial
+                autoIncrement: true
+                constraints:
+                      primaryKey: true
+                      nullable: false
+            - column:
+                name: name
+                type: varchar(30)
+                constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uk_roles_name
+
+      - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+      - addForeignKeyConstraint:
+          baseColumnNames: user_id
+          baseTableName: user_roles
+          constraintName: fk_user_roles_user_id
+          deferrable: true
+          initiallyDeferred: true
+          onDelete: CASCADE
+          onUpdate: RESTRICT
+          referencedColumnNames: id
+          referencedTableName: users
+
+      - addForeignKeyConstraint:
+          baseColumnNames: role_id
+          baseTableName: user_roles
+          constraintName: fk_user_roles_role_id
+          deferrable: true
+          initiallyDeferred: true
+          onDelete: CASCADE
+          onUpdate: RESTRICT
+          referencedColumnNames: id
+          referencedTableName: roles
