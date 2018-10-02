@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-      id: 1
+      id: 3
       author: sfelon
       changes:
       - createTable:
@@ -93,5 +93,10 @@ databaseChangeLog:
           referencedColumnNames: id
           referencedTableName: roles
 
-
+      - sql:
+          dbms: postgresql
+          endDelimiter: \nGO
+          splitStatements: true
+          sql: INSERT INTO roles(name) VALUES('ROLE_CEO'); INSERT INTO roles(name) VALUES('ROLE_HEAD'); INSERT INTO roles(name) VALUES('ROLE_EMPLOYEE');
+          stripComments: true
 
