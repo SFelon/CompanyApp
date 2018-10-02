@@ -92,3 +92,6 @@ databaseChangeLog:
           onUpdate: RESTRICT
           referencedColumnNames: id
           referencedTableName: roles
+
+
+
