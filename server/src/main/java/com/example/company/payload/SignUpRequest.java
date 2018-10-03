@@ -33,8 +33,8 @@ public class SignUpRequest {
     @Size(max = 16)
     private String businessPhone;
 
-    //private Department department;
-
+    @Size(max = 40)
+    private String departmentName;
 
     public String getFirstName() {
         return firstName;
@@ -90,5 +90,13 @@ public class SignUpRequest {
 
     public void setBusinessPhone(String businessPhone) {
         this.businessPhone = businessPhone;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }

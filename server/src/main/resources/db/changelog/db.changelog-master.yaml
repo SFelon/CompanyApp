@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-      id: 5
+      id: 7
       author: sfelon
       changes:
       - createTable:
@@ -60,6 +60,12 @@ databaseChangeLog:
             - column:
                   name: last_logged
                   type: timestamp with time zone
+            - column:
+                  name: department_id
+                  type: bigserial
+                  constraints:
+                      nullable: false
+
       - createTable:
             tableName: roles
             columns:
@@ -151,9 +157,9 @@ databaseChangeLog:
           referencedTableName: roles
 
       - addForeignKeyConstraint:
-          baseColumnNames: id
+          baseColumnNames: department_id
           baseTableName: users
-          constraintName: fk_users_department_id
+          constraintName: fk_users_department
           onDelete: CASCADE
           onUpdate: RESTRICT
           referencedColumnNames: id

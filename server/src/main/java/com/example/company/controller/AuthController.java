@@ -1,13 +1,12 @@
 package com.example.company.controller;
 
 import com.example.company.exception.AppException;
+import com.example.company.model.Department;
 import com.example.company.model.Role;
 import com.example.company.model.RoleName;
 import com.example.company.model.User;
-import com.example.company.payload.ApiResponse;
-import com.example.company.payload.JwtAuthenticationResponse;
-import com.example.company.payload.LoginRequest;
-import com.example.company.payload.SignUpRequest;
+import com.example.company.payload.*;
+import com.example.company.repository.DepartmentRepository;
 import com.example.company.repository.RoleRepository;
 import com.example.company.repository.UserRepository;
 import com.example.company.security.JwtTokenProvider;
@@ -41,6 +40,9 @@ public class AuthController {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    DepartmentRepository departmentRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -95,6 +97,11 @@ public class AuthController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
+        Department userDepartment = departmentRepository.findByDepartmentName(signUpRequest.getDepartmentName())
+                .orElseThrow(() -> new AppException("Department does not exist."));
+
+        user.setDepartment(userDepartment);
+
         Role userRole = roleRepository.findByName(RoleName.ROLE_EMPLOYEE)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
@@ -102,7 +109,6 @@ public class AuthController {
         java.util.Collections.singleton() method is a java.util.Collections class method. It creates a immutable set over
         a single specified element. An application of this method is to remove an element from Collections like List and Set.
         */
-
         user.setRoles(Collections.singleton(userRole));
 
         User result = userRepository.save(user);
@@ -116,7 +122,6 @@ public class AuthController {
         port(int), path(String), pathSegment(String...), queryParam(String, Object...), and fragment(String).
         Build the UriComponents instance with the build() method.
          */
-
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
@@ -125,8 +130,26 @@ public class AuthController {
         /* ResponseEntity with a CREATED status and a location header set to the given URI.
         return ResponseEntity.created(location).header("MyResponseHeader", "MyValue").body("Hello World");
          */
-
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+    }
+
+    @PostMapping("/departments")
+    public ResponseEntity<?> registerDepartment(@Valid @RequestBody DepartmentRequest departmentRequest) {
+        if(departmentRepository.existsByDepartmentName(departmentRequest.getDepartmentName())) {
+            return new ResponseEntity(new ApiResponse(false, "Department name already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        // Creating new department
+        Department department = new Department(departmentRequest.getDepartmentName(),departmentRequest.getCity());
+
+        Department result = departmentRepository.save(department);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/{id}")
+                .buildAndExpand(result.getId()).toUri();
+
+        return ResponseEntity.created(location).body(new ApiResponse(true, "Department registered successfully"));
     }
 }
 

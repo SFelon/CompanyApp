@@ -45,8 +45,17 @@ public class Department {
             fetch = FetchType.EAGER,
             orphanRemoval = true
     )
-    @Fetch(FetchMode.SELECT)
     private List<User> users = new ArrayList<>();
+
+
+    public Department() {
+
+    }
+
+    public Department(@NotBlank @Size(max = 40) String departmentName, @NotBlank @Size(max = 30) String city) {
+        this.departmentName = departmentName;
+        this.city = city;
+    }
 
     public Long getId() {
         return id;
