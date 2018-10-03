@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-      id: 3
+      id: 5
       author: sfelon
       changes:
       - createTable:
@@ -14,8 +14,13 @@ databaseChangeLog:
                       primaryKey: true
                       nullable: false
             - column:
-                  name: name
-                  type: varchar(40)
+                  name: first_name
+                  type: varchar(25)
+                  constraints:
+                      nullable: false
+            - column:
+                  name: last_name
+                  type: varchar(35)
                   constraints:
                       nullable: false
             - column:
@@ -26,17 +31,35 @@ databaseChangeLog:
                       unique: true
                       uniqueConstraintName: uk_users_username
             - column:
-                name: email
-                type: varchar(40)
-                constraints:
+                  name: email
+                  type: varchar(40)
+                  constraints:
                       nullable: false
                       unique: true
                       uniqueConstraintName: uk_users_email
             - column:
-                name: password
-                type: varchar(75)
-                constraints:
-                     nullable: false
+                  name: password
+                  type: varchar(75)
+                  constraints:
+                      nullable: false
+            - column:
+                  name: private_phone
+                  type: varchar(16)
+            - column:
+                  name: business_phone
+                  type: varchar(16)
+            - column:
+                  name: salary
+                  type: numeric(6,2)
+            - column:
+                  name: date_of_employment
+                  type: timestamp with time zone
+            - column:
+                  name: is_account_active
+                  type: boolean
+            - column:
+                  name: last_logged
+                  type: timestamp with time zone
       - createTable:
             tableName: roles
             columns:
@@ -70,13 +93,49 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
+      - createTable:
+          tableName: departments
+          columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: department_name
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: head_of_department
+                  type: varchar(60)
+              - column:
+                  name: number_of_employees
+                  type: int
+              - column:
+                  name: min_salary
+                  type: numeric(6,2)
+              - column:
+                  name: max_salary
+                  type: numeric(6,2)
+              - column:
+                  name: average_salary
+                  type: numeric(6,2)
+              - column:
+                  name: median_salary
+                  type: numeric(6,2)
 
       - addForeignKeyConstraint:
           baseColumnNames: user_id
           baseTableName: user_roles
           constraintName: fk_user_roles_user_id
-          deferrable: true
-          initiallyDeferred: true
           onDelete: CASCADE
           onUpdate: RESTRICT
           referencedColumnNames: id
@@ -86,12 +145,19 @@ databaseChangeLog:
           baseColumnNames: role_id
           baseTableName: user_roles
           constraintName: fk_user_roles_role_id
-          deferrable: true
-          initiallyDeferred: true
           onDelete: CASCADE
           onUpdate: RESTRICT
           referencedColumnNames: id
           referencedTableName: roles
+
+      - addForeignKeyConstraint:
+          baseColumnNames: id
+          baseTableName: users
+          constraintName: fk_users_department_id
+          onDelete: CASCADE
+          onUpdate: RESTRICT
+          referencedColumnNames: id
+          referencedTableName: departments
 
       - insert:
           columns:

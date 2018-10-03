@@ -85,8 +85,9 @@ public class AuthController {
         }
 
         // Creating user's account
-        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), signUpRequest.getPassword());
+        User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getUsername(),
+                signUpRequest.getEmail(), signUpRequest.getPassword(), signUpRequest.getPrivatePhone(),
+                signUpRequest.getBusinessPhone());
 
         /*java.lang.String encode(java.lang.CharSequence rawPassword) Encode the raw password.
         Generally, a good encoding algorithm applies a SHA-1 or greater hash combined with an 8-byte or greater
