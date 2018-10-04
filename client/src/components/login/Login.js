@@ -34,8 +34,8 @@ class LoginForm extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const loginRequest = Object.assign({}, values);
-        //this.props.signIn(loginRequest)
         console.log(loginRequest);
+        signInAction(loginRequest);
         }
     });
   }
@@ -76,8 +76,4 @@ class LoginForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  signIn: (loginRequest) => dispatch(signInAction(loginRequest)),
-});
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;
