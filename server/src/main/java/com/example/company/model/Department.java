@@ -35,9 +35,6 @@ public class Department {
 
     private BigDecimal maxSalary;
 
-    private BigDecimal averageSalary;
-
-    private BigDecimal medianSalary;
 
     @OneToMany(
             mappedBy = "department",
@@ -111,22 +108,6 @@ public class Department {
 
     public void setMaxSalary(BigDecimal maxSalary) {
         this.maxSalary = maxSalary;
-    }
-
-    public BigDecimal getAverageSalary() {
-        return averageSalary;
-    }
-
-    public void setAverageSalary(BigDecimal averageSalary) {
-        this.averageSalary = averageSalary;
-    }
-
-    public BigDecimal getMedianSalary() {
-        return medianSalary;
-    }
-
-    public void setMedianSalary(BigDecimal medianSalary) {
-        this.medianSalary = medianSalary;
     }
 
     public List<User> getUsers() {

@@ -131,12 +131,6 @@ databaseChangeLog:
               - column:
                   name: max_salary
                   type: numeric(6,2)
-              - column:
-                  name: average_salary
-                  type: numeric(6,2)
-              - column:
-                  name: median_salary
-                  type: numeric(6,2)
 
       - addForeignKeyConstraint:
           baseColumnNames: user_id
