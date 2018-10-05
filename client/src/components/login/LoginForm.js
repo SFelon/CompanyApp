@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
-import {Component} from 'react';
-import {signInAction, getCurrentUser} from '../../actions/auth_action';
+import { Link } from 'react-router-dom';
+import {
+  Button,
+  Form,
+  Icon,
+  Input,
+} from 'antd';
+import { signInAction, getCurrentUser } from '../../actions/auth_action';
 import LoadingIndicator from '../common/LoadingIndicator';
-import {Button, Form, Icon, Input} from 'antd';
 
 const FormItem = Form.Item;
 
@@ -15,7 +19,7 @@ class LoginForm extends Component {
     this.signIn = this.signIn.bind(this);
   }
 
-  signIn(data){
+  signIn(data) {
     this.props.signInAction(data);
   }
 
@@ -31,8 +35,8 @@ class LoginForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    if(this.props.isLoading) {
-      return <LoadingIndicator />
+    if (this.props.isLoading) {
+      return <LoadingIndicator />;
     }
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
@@ -44,7 +48,8 @@ class LoginForm extends Component {
               prefix={<Icon type="user" />}
               size="large"
               name="usernameOrEmail"
-              placeholder="Username or Email" />
+              placeholder="Username or Email"
+            />,
           )}
         </FormItem>
         <FormItem>
@@ -56,22 +61,22 @@ class LoginForm extends Component {
               size="large"
               name="password"
               type="password"
-              placeholder="Password"  />
+              placeholder="Password"
+            />,
           )}
         </FormItem>
         <FormItem>
           <Button type="primary" htmlType="submit" size="large" className="login-form-button">Login</Button>
-          Or <Link to="/signup">register now!</Link>
+          Or
+          <Link to="/signup">register now!</Link>
         </FormItem>
       </Form>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isLoading: state.auth.isLoading,
-  };
-};
+const mapStateToProps = state => ({
+  isLoading: state.auth.isLoading,
+});
 
-export default connect(mapStateToProps, {signInAction, getCurrentUser} )(LoginForm);
+export default connect(mapStateToProps, { signInAction, getCurrentUser })(LoginForm);

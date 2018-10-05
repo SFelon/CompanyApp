@@ -5,8 +5,8 @@ import {
   Switch,
   withRouter,
 } from 'react-router-dom';
-import Login from '../components/login/Login';
 import { Layout } from 'antd';
+import Login from '../components/login/Login';
 
 const { Content } = Layout;
 
@@ -23,7 +23,7 @@ class App extends Component {
           </div>
         </Content>
       </Layout>
-    )
+    );
   }
 }
 

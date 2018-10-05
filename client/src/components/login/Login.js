@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import { Form } from 'antd';
 import LoginForm from './LoginForm';
 import './Login.css';
-
-import { Form } from 'antd';
 
 class Login extends Component {
   render() {
@@ -11,7 +10,7 @@ class Login extends Component {
       <div className="login-container">
         <h1 className="page-title">Login</h1>
         <div className="login-content">
-          <AntWrappedLoginForm onLogin={this.props.onLogin} />
+          <AntWrappedLoginForm />
         </div>
       </div>
     );
@@ -19,4 +18,3 @@ class Login extends Component {
 }
 
 export default Login;
-
