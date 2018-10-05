@@ -1,19 +1,25 @@
-import {ACCESS_TOKEN, IS_LOADING, SET_TOKEN, API_BASE_URL, SET_CURRENT_USER} from "../constants";
 import { notification } from 'antd';
+import {
+  ACCESS_TOKEN,
+  IS_LOADING,
+  API_BASE_URL,
+  SET_CURRENT_USER,
+} from '../constants';
+
 
 const request = (options) => {
   const headers = new Headers({
     'Content-Type': 'application/json',
   });
 
-  if(localStorage.getItem(ACCESS_TOKEN)) {
-    headers.append('Authorization', 'Bearer ' + localStorage.getItem(ACCESS_TOKEN))
+  if (localStorage.getItem(ACCESS_TOKEN)) {
+    headers.append('Authorization', `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`);
   }
 
-  const defaults = {headers: headers};
-  options = Object.assign({}, defaults, options);
+  const defaults = { headers: headers };
+  const customOptions = Object.assign({}, defaults, options);
 
-  return fetch(options.url, options)
+  return fetch(customOptions.url, customOptions)
     .then(response =>
       response.json().then(json => {
         if(!response.ok) {
@@ -25,7 +31,6 @@ const request = (options) => {
 };
 
 export function setCurrentUser(currentUser) {
-  console.log("w set current user");
   return {
     type: SET_CURRENT_USER,
     currentUser,
@@ -35,25 +40,13 @@ export function setCurrentUser(currentUser) {
 }
 
 export function loadingUser(toggle) {
-  console.log("w set loading state");
   return {
     type: IS_LOADING,
     isLoading: toggle,
   };
 }
 
-export function setToken(data) {
-  console.log("w set token");
-  return {
-    type: SET_TOKEN,
-    token: data,
-  };
-}
-
-
-
 export function signInAction(loginRequest) {
-  console.log("inside action 1");
   return dispatch => {
     dispatch(loadingUser(true));
     return request({
@@ -62,7 +55,9 @@ export function signInAction(loginRequest) {
       body: JSON.stringify(loginRequest),
     }).then(response => {
       localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-    }).then(dispatch(getCurrentUser()))
+    }).then(setTimeout(() => {
+      dispatch(getCurrentUser())
+      }, 1500))
       .catch(error => {
       if (error.status === 401) {
         notification.error({
@@ -80,12 +75,12 @@ export function signInAction(loginRequest) {
 }
 
 export function getCurrentUser() {
-  console.log("w getCurrentUser");
   return dispatch => {
     if (!localStorage.getItem(ACCESS_TOKEN)) {
       dispatch(loadingUser(false));
       return Promise.reject("No access token set.");
     }
+
     return request({
       url: `${API_BASE_URL}/user`,
       method: 'GET',

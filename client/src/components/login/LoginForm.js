@@ -21,11 +21,9 @@ class LoginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("Zatwierdzenie formularza")
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const loginRequest = Object.assign({}, values);
-        console.log(loginRequest);
         this.signIn(loginRequest);
       }
     });

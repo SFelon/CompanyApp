@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, IS_LOADING } from '../constants';
+import {SET_CURRENT_USER, IS_LOADING} from '../constants';
 
 const initialState = {
   currentUser: null,
@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  console.log("w reducerze");
   switch(action.type) {
     case IS_LOADING:
       return {
