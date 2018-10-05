@@ -1,6 +1,5 @@
-import {ACCESS_TOKEN, API_BASE_URL, SET_CURRENT_USER} from "../constants";
+import {ACCESS_TOKEN, IS_LOADING, SET_TOKEN, API_BASE_URL, SET_CURRENT_USER} from "../constants";
 import { notification } from 'antd';
-
 
 const request = (options) => {
   const headers = new Headers({
@@ -25,13 +24,69 @@ const request = (options) => {
     );
 };
 
+export function setCurrentUser(currentUser) {
+  console.log("w set current user");
+  return {
+    type: SET_CURRENT_USER,
+    currentUser,
+    isAuthenticated: true,
+    isLoading: false,
+  };
+}
+
+export function loadingUser(toggle) {
+  console.log("w set loading state");
+  return {
+    type: IS_LOADING,
+    isLoading: toggle,
+  };
+}
+
+export function setToken(data) {
+  console.log("w set token");
+  return {
+    type: SET_TOKEN,
+    token: data,
+  };
+}
+
+
+
+export function signInAction(loginRequest) {
+  console.log("inside action 1");
+  return dispatch => {
+    dispatch(loadingUser(true));
+    return request({
+      url: `${API_BASE_URL}/auth/signin`,
+      method: 'POST',
+      body: JSON.stringify(loginRequest),
+    }).then(response => {
+      localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+    }).then(dispatch(getCurrentUser()))
+      .catch(error => {
+      if (error.status === 401) {
+        notification.error({
+          message: 'Company App',
+          description: 'Your Username or Password is incorrect. Please try again!'
+        });
+      } else {
+        notification.error({
+          message: 'Company App',
+          description: error.message || 'Sorry! Something went wrong. Please try again!'
+        });
+      }
+    })
+  }
+}
+
 export function getCurrentUser() {
   console.log("w getCurrentUser");
   return dispatch => {
     if (!localStorage.getItem(ACCESS_TOKEN)) {
+      dispatch(loadingUser(false));
       return Promise.reject("No access token set.");
     }
-    request({
+    return request({
       url: `${API_BASE_URL}/user`,
       method: 'GET',
     }).then(response => {
@@ -45,53 +100,3 @@ export function getCurrentUser() {
   };
 }
 
-export function setCurrentUser(currentUser) {
-  console.log("w set current user");
-  return {
-    type: SET_CURRENT_USER,
-    currentUser
-  };
-}
-
-export function signInAction(loginRequest) {
-  console.log("inside action 1");
-  request({
-    url: `${API_BASE_URL}/auth/signin`,
-    method: 'POST',
-    body: JSON.stringify(loginRequest),
-  }).then(response => {
-    localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-  }).catch(error => {
-    if(error.status === 401) {
-      notification.error({
-        message: 'Company App',
-        description: 'Your Username or Password is incorrect. Please try again!'
-      });
-    } else {
-      notification.error({
-        message: 'Company App',
-        description: error.message || 'Sorry! Something went wrong. Please try again!'
-      });
-    }
-  });
-  console.log("po loginie przed dispatch");
-}
-
-/*export function login(data) {
-  return dispatch => {
-    return axios.post('/api/auth', data).then(res => {
-      const token = res.data.token;
-      localStorage.setItem('jwtToken', token);
-      setAuthorizationToken(token);
-      dispatch(setCurrentUser(jwtDecode(token)));
-    });
-  }
-}
-
-export function getCurrentUser() {
-  console.log("w getCurrentUser");
-  return dispatch => {
-    dispatch(setCurrentUser({username: '123', id: '123'}));
-  }
-}
-*/

@@ -1,9 +1,10 @@
-import {Component} from "react";
-import {signInAction, getCurrentUser} from "../../actions/auth_action";
-import {Button, Form, Icon, Input} from "antd";
-import {Link} from "react-router-dom";
-import { connect } from 'react-redux';
 import React from 'react';
+import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
+import {Component} from 'react';
+import {signInAction, getCurrentUser} from '../../actions/auth_action';
+import LoadingIndicator from '../common/LoadingIndicator';
+import {Button, Form, Icon, Input} from 'antd';
 
 const FormItem = Form.Item;
 
@@ -11,11 +12,11 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.getUser = this.getUser.bind(this);
+    this.signIn = this.signIn.bind(this);
   }
 
-  getUser() {
-    this.props.getCurrentUser();
+  signIn(data){
+    this.props.signInAction(data);
   }
 
   handleSubmit(event) {
@@ -25,14 +26,16 @@ class LoginForm extends Component {
       if (!err) {
         const loginRequest = Object.assign({}, values);
         console.log(loginRequest);
-        signInAction(loginRequest);
-        this.getUser();
+        this.signIn(loginRequest);
       }
     });
   }
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    if(this.props.isLoading) {
+      return <LoadingIndicator />
+    }
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
@@ -67,4 +70,10 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, {getCurrentUser} )(LoginForm);
+const mapStateToProps = state => {
+  return {
+    isLoading: state.auth.isLoading,
+  };
+};
+
+export default connect(mapStateToProps, {signInAction, getCurrentUser} )(LoginForm);

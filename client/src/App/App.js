@@ -17,7 +17,7 @@ class App extends Component {
         <Content className="app-content">
           <div className="container">
             <Switch>
-              <Route path="/login" component={Login} />
+              <Route path="/" component={Login} />
               <Route path="/login" component={Login} />
             </Switch>
           </div>
