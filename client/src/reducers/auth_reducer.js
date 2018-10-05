@@ -1,18 +1,21 @@
 import { SET_CURRENT_USER } from '../constants';
-import isEmpty from 'lodash/isEmpty';
+import isEmpty from 'lodash';
 
 const initialState = {
+  currentUser: null,
   isAuthenticated: false,
-  user: {}
+  isLoading: false,
 };
 
-export default (state = initialState, action = {}) => {
+export default (state = initialState, action) => {
+  console.log("w reducerze");
   switch(action.type) {
     case SET_CURRENT_USER:
       return {
-        isAuthenticated: !isEmpty(action.user),
-        user: action.user
+        currentUser: action.currentUser,
+        isAuthenticated: !isEmpty(action.currentUser),
       };
-    default: return state;
+    default:
+      return state;
   }
-}
+};

@@ -1,34 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
-import { ACCESS_TOKEN } from '../../constants';
-import { signInAction } from '../../actions/auth_action';
-import LoginForm from './LoginForm';
-import './Login.css';
+import {Component} from "react";
+import {signInAction, getCurrentUser} from "../../actions/auth_action";
+import {Button, Form, Icon, Input} from "antd";
+import {Link} from "react-router-dom";
+import { connect } from 'react-redux';
+import React from 'react';
 
-import { Form, Input, Button, Icon } from 'antd';
 const FormItem = Form.Item;
 
-class Login extends Component {
-  render() {
-    const AntWrappedLoginForm = Form.create()(LoginForm);
-    return (
-      <div className="login-container">
-        <h1 className="page-title">Login</h1>
-        <div className="login-content">
-          <AntWrappedLoginForm onLogin={this.props.onLogin} />
-        </div>
-      </div>
-    );
-  }
-}
-
-export default Login;
-/*
 class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getUser = this.getUser.bind(this);
+  }
+
+  getUser() {
+    this.props.getCurrentUser();
   }
 
   handleSubmit(event) {
@@ -38,8 +25,9 @@ class LoginForm extends Component {
       if (!err) {
         const loginRequest = Object.assign({}, values);
         console.log(loginRequest);
-        this.props.dispatch(signInAction(loginRequest));
-        }
+        signInAction(loginRequest);
+        this.getUser();
+      }
     });
   }
 
@@ -79,6 +67,4 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, null)(Login);
-*/
-
+export default connect(null, {getCurrentUser} )(LoginForm);
