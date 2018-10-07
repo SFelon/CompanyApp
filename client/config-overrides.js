@@ -8,6 +8,7 @@ module.exports = function override(config, env) {
       '@layout-body-background': '#FFFFFF',
       '@layout-header-background': '#FFFFFF',
       '@layout-footer-background': '#FFFFFF',
+      '@primary-color': '#13c2c2',
     },
     javascriptEnabled: true,
   })(customConfig, env);

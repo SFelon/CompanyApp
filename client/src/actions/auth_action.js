@@ -4,6 +4,7 @@ import {
   IS_LOADING,
   API_BASE_URL,
   SET_CURRENT_USER,
+  LOGOUT_USER,
 } from '../constants';
 
 
@@ -65,6 +66,14 @@ export function getCurrentUser() {
   };
 }
 
+export function logoutUser() {
+  return {
+    type: LOGOUT_USER,
+    isLoading: false,
+  };
+}
+
+
 export function signInAction(loginRequest) {
   return (dispatch) => {
     dispatch(loadingUser(true));
@@ -90,5 +99,17 @@ export function signInAction(loginRequest) {
           });
         }
       });
+  };
+}
+
+export function logoutAction() {
+  return (dispatch) => {
+    dispatch(loadingUser(true));
+    localStorage.removeItem(ACCESS_TOKEN);
+    dispatch(logoutUser());
+    notification.success({
+      message: 'Company App',
+      description: 'You are successfully logged out.',
+    });
   };
 }

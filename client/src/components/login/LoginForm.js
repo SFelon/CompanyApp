@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -21,6 +21,7 @@ class LoginForm extends Component {
 
   signIn(data) {
     this.props.signInAction(data);
+    this.props.history.push("/");
   }
 
   handleSubmit(event) {
@@ -35,9 +36,6 @@ class LoginForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    if (this.props.isLoading) {
-      return <LoadingIndicator />;
-    }
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
@@ -79,4 +77,4 @@ const mapStateToProps = state => ({
   isLoading: state.auth.isLoading,
 });
 
-export default connect(mapStateToProps, { signInAction, getCurrentUser })(LoginForm);
+export default withRouter(connect(mapStateToProps, { signInAction, getCurrentUser })(LoginForm));
