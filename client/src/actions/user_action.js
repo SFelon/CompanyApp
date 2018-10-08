@@ -1,7 +1,7 @@
 import {
     ACCESS_TOKEN,
     API_BASE_URL,
-    IS_LOADING,
+    IS_LOADING_PROFILE,
     SET_USER_DATA,
 } from '../constants';
 
@@ -32,19 +32,18 @@ export function setUserData(userData) {
     return {
         type: SET_USER_DATA,
         userData,
-        isLoading: false,
+        isLoadingProfile: false,
     };
 }
 
 export function loadingIndicator(toggle) {
     return {
-        type: IS_LOADING,
-        isLoading: toggle,
+        type: IS_LOADING_PROFILE,
+        isLoadingProfile: toggle,
     };
 }
 
-
-export function getUserProfile(userId) {
+export function getUserProfile(username) {
 return (dispatch) => {
     dispatch(loadingIndicator(true));
     if (!localStorage.getItem(ACCESS_TOKEN)) {
@@ -52,15 +51,15 @@ return (dispatch) => {
         return Promise.reject('No access token set.');
     }
     return request({
-    url: `${API_BASE_URL}/user/${userId}`,
+    url: `${API_BASE_URL}/users/${username}`,
     method: 'GET',
     }).then((response) => {
         dispatch(setUserData(response));
     }).catch((error) => {
     notification.error({
         message: 'Company App',
-        description: error.message || 'Sorry! Something went wrong. Please try again!',
+        description: error.message || 'Sorry! Could not load the user profile!',
     });
     });
 };
-}  
+}

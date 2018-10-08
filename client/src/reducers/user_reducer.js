@@ -1,15 +1,20 @@
-import { IS_LOADING, SET_USER_DATA } from '../constants';
+import { IS_LOADING_PROFILE, SET_USER_DATA } from '../constants';
 
 const initialState = {
   userData: null,
+  isLoadingProfile: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case IS_LOADING_PROFILE:
+      return {
+        isLoadingProfile: action.isLoadingProfile,
+      };
     case SET_USER_DATA:
       return {
         userData: action.userData,
-        isLoading: action.isLoading,
+        isLoadingProfile: action.isLoadingProfile,
       };
     default:
       return state;

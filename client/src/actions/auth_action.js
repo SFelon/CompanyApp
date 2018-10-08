@@ -53,7 +53,7 @@ export function getCurrentUser() {
     }
 
     return request({
-      url: `${API_BASE_URL}/user`,
+      url: `${API_BASE_URL}/users`,
       method: 'GET',
     }).then((response) => {
       dispatch(setCurrentUser(response));
