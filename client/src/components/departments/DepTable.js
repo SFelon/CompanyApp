@@ -1,112 +1,118 @@
 import React from 'react';
-import { Input, Table, Icon, Divider } from 'antd';
-import _ from 'lodash';
+import { Input, Table, Icon, Divider, Button } from 'antd';
+import './DepTable.css'
 
-const Search = Input.Search;
-
-const data = [
-  {fieldtext:{
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      x:'extra1'
-    }}
-  , {fieldtext:{
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      x:'extra2'
-    }}, {fieldtext:{
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      x:'extra2'
-    }}, {fieldtext:{
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park',
-      x:'extra3'
-    }}];
+const data = [{
+  key: '1',
+  name: 'Department 1',
+  city: 'New York',
+  head: 'Arnold S',
+}, {
+  key: '2',
+  name: 'Department 2',
+  city: 'London',
+  head: 'Lucjan K',
+}, {
+  key: '3',
+  name: 'Department 3',
+  city: 'Budapest',
+  head: 'Vitali V',
+}, {
+  key: '4',
+  name: 'Department 4',
+  city: 'Warsaw',
+  head: 'Staszek S',
+}];
 
 class DepTable extends React.Component {
-  state = {
-    sortedInfo: null,
-    data,
-    searchText:'',
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      sortedInfo: null,
+      searchText:'',
+    };
   };
 
+
   handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
     this.setState({
       sortedInfo: sorter,
     });
   }
 
-  emitEmpty = () => {
-    this.setState({
-      data: data,
-      searchText: '',
-    });
+  handleSearch = (selectedKeys, confirm) => () => {
+    confirm();
+    this.setState({ searchText: selectedKeys[0] });
   }
 
-  onInputChange = (e) => {
-    this.setState({ searchText: e.target.value });
-  }
-
-  onSearch = (e) => {
-
-    this.setState({ searchText: e.target.value });
-    const { searchText } = this.state;
-    const reg = new RegExp(e.target.value, 'gi');
-    this.setState({
-      data: _.flatMap(this.state.data, record => {
-        const nameMatch = record.name.match(reg);
-        const addressMatch = record.address.match(reg);
-        if (!nameMatch && !addressMatch) {
-          return null;
-        }
-        return {
-          ...record,
-        };
-      }).filter(record => !!record),
-    });
-    if (e.target.value === ''){
-      this.setState({
-        data: data,
-      });
-
-    }
+  handleReset = clearFilters => () => {
+    clearFilters();
+    this.setState({ searchText: '' });
   }
 
   render() {
     let { sortedInfo } = this.state;
     sortedInfo = sortedInfo || {};
+    function sortScenario(a,b){
+      return b.localeCompare(a, 'pl', {sensitivity: 'base'});
+    };
     const columns = [{
       title: 'Department Name',
-      dataIndex: 'fieldtext.name',
+      dataIndex: 'name',
       key: 'name',
-      sorter: (a, b) => a.name > b.name ? 1 : -1,
+      defaultSortOrder: 'descend',
+      sorter: (a,b) => sortScenario(a.name, b.name),
       sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
       width: '30%',
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+        <div className="custom-filter-dropdown">
+          <Input
+            ref={ele => this.searchInput = ele}
+            placeholder="Search Name"
+            value={selectedKeys[0]}
+            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={this.handleSearch(selectedKeys, confirm)}
+          />
+          <Button type="primary" onClick={this.handleSearch(selectedKeys, confirm)}>Search</Button>
+          <Button onClick={this.handleReset(clearFilters)}>Reset</Button>
+        </div>
+      ),
+      filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#13c2c2' : '#aaa' }} />,
+      onFilter: (value, record) => record.name.toLowerCase().includes(value.toLowerCase()),
+      onFilterDropdownVisibleChange: (visible) => {
+        if (visible) {
+          setTimeout(() => {
+            this.searchInput.focus();
+          });
+        }
+      },
+      render: (text) => {
+        const { searchText } = this.state;
+        return searchText ? (
+          <span>
+            {text.split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i')).map((fragment, i) => (
+              fragment.toLowerCase() === searchText.toLowerCase()
+                ? <span key={i} className="highlight">{fragment}</span> : fragment 
+            ))}
+          </span>
+        ) : text;
+      },
     },
       {
         title: 'City',
-        dataIndex: 'fieldtext.age',
-        key: 'age',
-        sorter: (a, b) => a.age - b.age,
-        sortOrder: sortedInfo.columnKey === 'age' && sortedInfo.order,
+        dataIndex: 'city',
+        key: 'city',
+        sorter: (a, b) => sortScenario(a.city, b.city),
+        sortOrder: sortedInfo.columnKey === 'city' && sortedInfo.order,
         width: '25%',
       },
       {
         title: 'Head of Department',
-        dataIndex: 'fieldtext.address',
-        key: 'address',
-        sorter: (a, b) => a.address > b.address ? 1 : -1,
-        sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
+        dataIndex: 'head',
+        key: 'head',
+        sorter: (a, b) => sortScenario(a.head, b.head),
+        sortOrder: sortedInfo.columnKey === 'head' && sortedInfo.order,
         width: '30%',
       },
       {
@@ -115,27 +121,30 @@ class DepTable extends React.Component {
         width: '15%',
         render: (text, record) => (
           <span>
-            <a href="javascript:;">Invite {record.name}</a>
+            <a href="javascript:;">
+            {`Edit `} 
+            <Icon type="edit"/>
+            </a>
             <Divider type="vertical" />
-            <a href="javascript:;">Delete</a>
+            <a href="javascript:;">
+            {`Delete `} 
+            <Icon type="delete"/>
+            </a>
           </span>
         ),
       }
     ];
 
-    const { searchText } = this.state;
-    const suffix = searchText ? <Icon type="close-circle" onClick={this.emitEmpty} /> : null;
+  if(this.props.departments) {
     return (
       <div>
-        <div className="table-operations">
-          <Search size="large" ref={ele => this.searchText = ele} suffix={suffix} onChange={this.onSearch} placeholder="Search Records" value={this.state.searchText}
-                  onChange={this.onSearch} onPressEnter={this.onSearch}
-          />
-        </div>
-        <Table columns={columns} dataSource={this.state.data} rowKey={record => record.fieldtext.key} onChange={this.handleChange} size="small"/>
+        <Table columns={columns} dataSource={data} rowKey={record => record.key} onChange={this.handleChange} size="small"/>
       </div>
     );
+  } else {
+    return null;
   }
+}
 }
 
 export default DepTable;

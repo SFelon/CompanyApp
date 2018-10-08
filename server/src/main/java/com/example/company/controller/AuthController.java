@@ -133,24 +133,6 @@ public class AuthController {
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 
-    @PostMapping("/departments")
-    public ResponseEntity<?> registerDepartment(@Valid @RequestBody DepartmentRequest departmentRequest) {
-        if(departmentRepository.existsByDepartmentName(departmentRequest.getDepartmentName())) {
-            return new ResponseEntity(new ApiResponse(false, "Department name already in use!"),
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        // Creating new department
-        Department department = new Department(departmentRequest.getDepartmentName(),departmentRequest.getCity());
-
-        Department result = departmentRepository.save(department);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/{id}")
-                .buildAndExpand(result.getId()).toUri();
-
-        return ResponseEntity.created(location).body(new ApiResponse(true, "Department registered successfully"));
-    }
 }
 
 

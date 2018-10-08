@@ -4,6 +4,13 @@ import _ from 'lodash';
 
 const Search = Input.Search;
 
+/* sort by date 
+sorter: (a, b) => { return moment(a.publishedAt).unix() - moment(b.publishedAt).unix()}
+
+in order to handle the situation where publishedAt == "" try:
+sorter: (a, b) => { return moment(a.publishedAt || 0).unix() - moment(b.publishedAt || 0).unix() }
+*/
+
 const data = [
   {fieldtext:{
   key: '1',

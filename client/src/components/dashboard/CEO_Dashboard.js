@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
-import { Col, Row, Card, Icon} from 'antd';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getDepartmenList } from '../../actions/department_action';
+import { Col, Row, Card, Icon, Skeleton} from 'antd';
 import DepTable from '../departments/DepTable';
 
 class CEO_Dashboard extends Component {
+
+  getDepartments = () => {
+    this.props.getDepartmenList();
+  }
+
   render() {
     return (
       <div className="ceo-dashboard" style={{padding: '0 50px'}}>
         <Row gutter={16}>
           <Col span={18}>
-            <DepTable />
+            <Skeleton loading={this.props.isLoading}>
+              <DepTable departments={this.props.departments}/>
+            </Skeleton>
           </Col>
           <Col span={6}>
             <Card title={<span><Icon type='cluster' style={{padding: '0 8px', fontSize: '32px'}}/> Departments</span>}
-                  actions={[<Icon type="ordered-list" />, <Icon type="plus" /> ]}
+                  actions={[
+                  <Icon type="ordered-list"
+                  onClick={this.getDepartments} />, 
+                  <Icon type="plus" /> 
+                ]}
             >
               Card content
             </Card>
@@ -29,4 +43,9 @@ class CEO_Dashboard extends Component {
   }
 }
 
-export default CEO_Dashboard;
+const mapStateToProps = (state) => ({
+  departments: state.departments.departments,
+  isLoading: state.departments.isLoadingDepartments,
+});
+
+export default withRouter(connect(mapStateToProps, { getDepartmenList })(CEO_Dashboard));

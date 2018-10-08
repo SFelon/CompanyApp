@@ -46,6 +46,7 @@ class AppHeader extends Component {
       visible: false });
   };
 
+  //TODO enhance modal look
   renderModal = () => {
     if(this.props.userData) {
       return (
@@ -74,7 +75,6 @@ class AppHeader extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      console.log(this.props.userData);
       return (
         <Header className='app-header'>
           <div className='container'>
