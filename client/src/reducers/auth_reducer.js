@@ -3,7 +3,6 @@ import { SET_CURRENT_USER, IS_LOADING, LOGOUT_USER } from '../constants';
 const initialState = {
   currentUser: null,
   isAuthenticated: false,
-  roles: [],
   isLoading: false,
 };
 
@@ -17,11 +16,10 @@ export default (state = initialState, action) => {
       return {
         currentUser: action.currentUser,
         isAuthenticated: action.isAuthenticated,
-        roles: action.currentUser.map(data => data.authorities),
         isLoading: action.isLoading,
       };
     case LOGOUT_USER:
-      return state;
+      return initialState;
     default:
       return state;
   }

@@ -27,30 +27,34 @@ class AppHeader extends Component {
   }
 
   render() {
-    return (
-    <Header className='app-header'>
-        <div className='container'>
-              <div className='app-title' style={{ lineHeight: '64px', float: 'left' }}>
-                <Link to='/'> <Icon type='reconciliation' theme='outlined' /> Company App </Link>
-              </div>      
-        <Menu
-            className='app-menu'
-            mode='horizontal'
-            style={{ lineHeight: '64px', float: 'right' }}
-            onClick={this.handleClick}
-        >
-            <SubMenu title={<span><Icon type='setting' /> User </span>}>
-            <MenuItemGroup title='Item 1'>
-                <Menu.Item key='profile'>
+    if (this.props.isAuthenticated) {
+      return (
+        <Header className='app-header'>
+          <div className='container'>
+            <div className='app-title' style={{lineHeight: '64px', float: 'left'}}>
+              <Link to='/'> <Icon type='reconciliation' theme='outlined'/> Company App </Link>
+            </div>
+            <Menu
+              className='app-menu'
+              mode='horizontal'
+              style={{lineHeight: '64px', float: 'right'}}
+              onClick={this.handleClick}
+            >
+              <SubMenu title={<span><Icon type='setting'/> User </span>}>
+                <MenuItemGroup title='Item 1'>
+                  <Menu.Item key='profile'>
                     <Icon type='user'/>Profile</Menu.Item>
-                <Menu.Item key='logout'>
+                  <Menu.Item key='logout'>
                     <Icon type='logout'/>Logout</Menu.Item>
-            </MenuItemGroup>
-            </SubMenu>
-        </Menu>
-        </div>   
-    </Header>
-    );
+                </MenuItemGroup>
+              </SubMenu>
+            </Menu>
+          </div>
+        </Header>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
