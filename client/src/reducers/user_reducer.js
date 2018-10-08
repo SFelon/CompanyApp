@@ -1,7 +1,16 @@
 import { IS_LOADING_PROFILE, SET_USER_DATA } from '../constants';
 
 const initialState = {
-  userData: null,
+  userData: {
+    firstName: "",
+    lastName: "",
+    privatePhone: "",
+    businessPhone: "",
+    dateOfEmployment: "",
+    lastLogged: "",
+    accountActive: false,
+    department: "",
+  },
   isLoadingProfile: false,
 };
 

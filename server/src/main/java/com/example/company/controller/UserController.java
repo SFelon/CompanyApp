@@ -39,7 +39,7 @@ public class UserController {
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         UserProfile userProfile = new UserProfile(user.getFirstName(), user.getLastName(),
-                user.getBusinessPhone(), user.getPrivatePhone(), user.getDateOfEmployment(), user.isAccountActive(),
+                user.getEmail(), user.getBusinessPhone() , user.getPrivatePhone(), user.getDateOfEmployment(), user.isAccountActive(),
                 user.getLastLogged(), user.getDepartment().getDepartmentName());
 
         return userProfile;

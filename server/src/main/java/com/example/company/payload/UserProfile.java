@@ -1,12 +1,12 @@
 package com.example.company.payload;
 
-import com.example.company.model.Department;
 import java.util.Date;
 
 public class UserProfile {
 
     private String firstName;
     private String lastName;
+    private String email;
     private String privatePhone;
     private String businessPhone;
     private Date dateOfEmployment;
@@ -14,10 +14,11 @@ public class UserProfile {
     private Date lastLogged;
     private String departmentName;
 
-    public UserProfile(String firstName, String lastName, String privatePhone, String businessPhone,
+    public UserProfile(String firstName, String lastName, String email, String privatePhone, String businessPhone,
                        Date dateOfEmployment, boolean isAccountActive, Date lastLogged, String departmentName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
         this.privatePhone = privatePhone;
         this.businessPhone = businessPhone;
         this.dateOfEmployment = dateOfEmployment;
@@ -40,6 +41,14 @@ public class UserProfile {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPrivatePhone() {
@@ -82,11 +91,11 @@ public class UserProfile {
         this.lastLogged = lastLogged;
     }
 
-    public String getDepartment() {
+    public String getDepartmentName() {
         return departmentName;
     }
 
-    public void setDepartment(String departmentName) {
+    public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
 }

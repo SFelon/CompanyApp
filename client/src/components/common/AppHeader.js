@@ -3,19 +3,23 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutAction } from '../../actions/auth_action';
 import { getUserProfile } from '../../actions/user_action';
-import { Menu, Icon, Layout, Avatar } from 'antd';
+import { Menu, Icon, Layout, Avatar, Modal, Button } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 const Header = Layout.Header;
 
 class AppHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { visible: false }
+  };
 
   handleClick = (e) => {
     switch (e.key) {
       case 'profile':
-        //TODO
         this.props.getUserProfile(this.props.currentUser.username);
+        this.showModal();
         break;
       case 'logout':
         this.props.logoutAction();
@@ -25,8 +29,52 @@ class AppHeader extends Component {
     }
   };
 
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = (e) => {
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = () => {
+    this.setState({
+      visible: false });
+  };
+
+  renderModal = () => {
+    if(this.props.userData) {
+      return (
+        <Modal
+          title={<span><Avatar icon="smile" style={{ backgroundColor: '#13c2c2' }} />{` @${this.props.currentUser.username} User Profile`}</span>}
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          footer={[
+            <Button key="back" onClick={this.handleCancel}>Return</Button>,
+          ]}
+        >
+          <p>{`First name: ${this.props.userData.firstName}`}</p>
+          <p>{`Last name: ${this.props.userData.lastName}`}</p>
+          <p>{`Email: ${this.props.userData.email}`}</p>
+          <p>{`Business phone: ${this.props.userData.businessPhone}`}</p>
+          <p>{`Private phone: ${this.props.userData.privatePhone}`}</p>
+          <p>{`Department: ${this.props.userData.department}`}</p>
+          <p>{`Date of employment: ${this.props.userData.dateOfEmployment}`}</p>
+          <p>{`Last logged: ${this.props.userData.lastLogged}`}</p>
+          <p>{`Account active: ${this.props.userData.accountActive}`}</p>
+        </Modal>
+      );
+    };
+  };
+
   render() {
     if (this.props.isAuthenticated) {
+      console.log(this.props.userData);
       return (
         <Header className='app-header'>
           <div className='container'>
@@ -51,12 +99,17 @@ class AppHeader extends Component {
               </SubMenu>
             </Menu>
           </div>
+          {this.renderModal()}
         </Header>
       );
     } else {
       return null;
-    }
+    };
   };
-}
+};
 
-export default withRouter(connect(null, { logoutAction , getUserProfile })(AppHeader));
+const mapStateToProps = (state) => ({
+  userData: state.user.userData,
+});
+
+export default withRouter(connect(mapStateToProps, { logoutAction , getUserProfile })(AppHeader));
