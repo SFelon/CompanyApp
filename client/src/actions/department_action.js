@@ -3,6 +3,7 @@ import {
     API_BASE_URL,
     IS_LOADING_DEPARTMENT,
     SET_DEPARTMENT_LIST,
+    ADD_NEW_DEPARTMENT,
 } from '../constants';
 
 import { notification } from 'antd';
@@ -36,6 +37,14 @@ export function setDepartmentList(departments) {
     };
 }
 
+export function setNewDepartment(newDepartment) {
+    return {
+        type: ADD_NEW_DEPARTMENT,
+        newDepartment,
+        isLoadingDepartments: false,
+    };
+}
+
 export function loadingIndicator(toggle) {
     return {
         type: IS_LOADING_DEPARTMENT,
@@ -63,3 +72,31 @@ return (dispatch) => {
     });
 };
 }
+
+export function addDepartment(addDepRequest) {
+    return (dispatch) => {
+      dispatch(loadingIndicator(true));
+      return request({
+        url: `${API_BASE_URL}/departments`,
+        method: 'POST',
+        body: JSON.stringify(addDepRequest),
+      }).then((response) => {
+          //what with response
+      }).then(setTimeout(() => {
+        dispatch(setNewDepartment(addDepRequest));
+      }, 500))
+        .catch((error) => {
+          if (error.status === 401) {
+            notification.error({
+              message: 'Company App',
+              description: 'You are not authorized to add new department!',
+            });
+          } else {
+            notification.error({
+              message: 'Company App',
+              description: error.message || 'Sorry! Something went wrong. Please try again!',
+            });
+          }
+        });
+    };
+  }

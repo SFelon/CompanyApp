@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getDepartmentList } from '../../actions/department_action';
-import { Col, Row, Card, Icon, Skeleton} from 'antd';
+import { getDepartmentList, addDepartment } from '../../actions/department_action';
+import { getHeadsNames } from "../../actions/user_action";
 import DepTable from '../departments/DepTable';
 import AddDepModal from '../departments/AddDepModal';
-import {getHeadsNames} from "../../actions/user_action";
+import { Col, Row, Card, Icon, Skeleton} from 'antd';
+
+
+
 
 class CEO_Dashboard extends Component {
   state = {
@@ -27,8 +30,9 @@ class CEO_Dashboard extends Component {
       if (err) {
         return;
       }
-
       console.log('Received values of form: ', values);
+      const addDepRequest = Object.assign({}, values);
+      this.props.addDepartment(addDepRequest);
       form.resetFields();
       this.setState({ visible: false });
     });
@@ -89,4 +93,4 @@ const mapStateToProps = (state) => ({
   isLoading: state.departments.isLoadingDepartments,
 });
 
-export default withRouter(connect(mapStateToProps, { getDepartmentList , getHeadsNames })(CEO_Dashboard));
+export default withRouter(connect(mapStateToProps, { getDepartmentList , getHeadsNames, addDepartment })(CEO_Dashboard));

@@ -3,6 +3,7 @@ package com.example.company.payload;
 public class HeadsNameResponse {
     private String firstName;
     private String lastName;
+    private String username;
 
     public HeadsNameResponse() {
 
@@ -24,4 +25,11 @@ public class HeadsNameResponse {
         this.lastName = lastName;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

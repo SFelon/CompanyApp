@@ -7,15 +7,18 @@ const FormItem = Form.Item;
 const AddDepModal = Form.create()(class extends Component {
   constructor(props) {
     super(props);
-    this.state = { options: [] };
+    this.state = { data: [] };
   }
 
   static getDerivedStateFromProps(props) {
     if (props.heads) {
-      let names = props.heads.map((element) => ({ fullName: element.firstName + " " + element.lastName}));
+      let names = props.heads.map((element) => ({ 
+      text: element.firstName + " " + element.lastName,
+      value: element.username,
+    }));
       console.log(names);
         return {
-          options: names,
+          data: names,
         };
       }
     return null;
@@ -71,7 +74,11 @@ const AddDepModal = Form.create()(class extends Component {
             {getFieldDecorator('headOfDepartment', {
               rules: [{ type: 'string', required: true, message: 'Please select the head of department!' }],
             })(
-              <Cascader options={this.state.options} fieldNames={{ label: 'fullName', value: 'fullName', children: 'children' }} />
+              <Select
+              placeholder="Select employee"
+              >
+              {data.map(d => <Option key={d.value}>{d.text}</Option>)}
+              </Select>  
             )}
           </FormItem>
           <FormItem

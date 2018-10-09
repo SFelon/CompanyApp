@@ -4,6 +4,7 @@ import {
     IS_LOADING_PROFILE,
     SET_USER_DATA,
     SET_HEADS_NAME,
+    ADD_NEW_DEPARTMENT,
 } from '../constants';
 
 import { notification } from 'antd';
