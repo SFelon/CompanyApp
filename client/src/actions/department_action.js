@@ -43,7 +43,7 @@ export function loadingIndicator(toggle) {
     };
 }
 
-export function getDepartmenList() {
+export function getDepartmentList() {
 return (dispatch) => {
     dispatch(loadingIndicator(true));
     if (!localStorage.getItem(ACCESS_TOKEN)) {

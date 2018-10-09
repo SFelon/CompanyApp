@@ -1,28 +1,7 @@
 import React from 'react';
 import { Input, Table, Icon, Divider, Button } from 'antd';
+import { connect } from 'react-redux';
 import './DepTable.css'
-
-const data = [{
-  key: '1',
-  name: 'Department 1',
-  city: 'New York',
-  head: 'Arnold S',
-}, {
-  key: '2',
-  name: 'Department 2',
-  city: 'London',
-  head: 'Lucjan K',
-}, {
-  key: '3',
-  name: 'Department 3',
-  city: 'Budapest',
-  head: 'Vitali V',
-}, {
-  key: '4',
-  name: 'Department 4',
-  city: 'Warsaw',
-  head: 'Staszek S',
-}];
 
 class DepTable extends React.Component {
   
@@ -33,7 +12,6 @@ class DepTable extends React.Component {
       searchText:'',
     };
   };
-
 
   handleChange = (pagination, filters, sorter) => {
     this.setState({
@@ -54,16 +32,20 @@ class DepTable extends React.Component {
   render() {
     let { sortedInfo } = this.state;
     sortedInfo = sortedInfo || {};
+
     function sortScenario(a,b){
+      a = a || '';
+      b = b || '';
       return b.localeCompare(a, 'pl', {sensitivity: 'base'});
     };
+
     const columns = [{
       title: 'Department Name',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'departmentName',
+      key: 'departmentName',
       defaultSortOrder: 'descend',
-      sorter: (a,b) => sortScenario(a.name, b.name),
-      sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+      sorter: (a,b) => sortScenario(a.departmentName, b.departmentName),
+      sortOrder: sortedInfo.columnKey === 'departmentName' && sortedInfo.order,
       width: '30%',
       filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
         <div className="custom-filter-dropdown">
@@ -79,7 +61,7 @@ class DepTable extends React.Component {
         </div>
       ),
       filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#13c2c2' : '#aaa' }} />,
-      onFilter: (value, record) => record.name.toLowerCase().includes(value.toLowerCase()),
+      onFilter: (value, record) => record.departmentName.toLowerCase().includes(value.toLowerCase()),
       onFilterDropdownVisibleChange: (visible) => {
         if (visible) {
           setTimeout(() => {
@@ -109,10 +91,10 @@ class DepTable extends React.Component {
       },
       {
         title: 'Head of Department',
-        dataIndex: 'head',
-        key: 'head',
-        sorter: (a, b) => sortScenario(a.head, b.head),
-        sortOrder: sortedInfo.columnKey === 'head' && sortedInfo.order,
+        dataIndex: 'headOfDepartment',
+        key: 'headOfDepartment',
+        sorter: (a, b) => sortScenario(a.headOfDepartment, b.headOfDepartment),
+        sortOrder: sortedInfo.columnKey === 'headOfDepartment' && sortedInfo.order,
         width: '30%',
       },
       {
@@ -135,10 +117,10 @@ class DepTable extends React.Component {
       }
     ];
 
-  if(this.props.departments) {
+  if(this.props.departments && this.props.departments.length > 0) {
     return (
       <div>
-        <Table columns={columns} dataSource={data} rowKey={record => record.key} onChange={this.handleChange} size="small"/>
+        <Table columns={columns} dataSource={this.props.departments} rowKey={record => record.id} onChange={this.handleChange} size="small"/>
       </div>
     );
   } else {
@@ -147,4 +129,8 @@ class DepTable extends React.Component {
 }
 }
 
-export default DepTable;
+const mapStateToProps = (state) => ({
+  departments: state.departments.departments,
+});
+
+export default connect(mapStateToProps, null)(DepTable);

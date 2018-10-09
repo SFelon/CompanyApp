@@ -1,4 +1,4 @@
-import { IS_LOADING_PROFILE, SET_USER_DATA } from '../constants';
+import {IS_LOADING_PROFILE, LOGOUT_USER, SET_USER_DATA, SET_HEADS_NAME} from '../constants';
 
 const initialState = {
   userData: {
@@ -11,6 +11,7 @@ const initialState = {
     accountActive: false,
     department: "",
   },
+  headsName: [],
   isLoadingProfile: false,
 };
 
@@ -25,6 +26,13 @@ export default (state = initialState, action) => {
         userData: action.userData,
         isLoadingProfile: action.isLoadingProfile,
       };
+    case SET_HEADS_NAME:
+      return {
+        headsName: action.headsName,
+        isLoadingProfile: action.isLoadingProfile,
+      };
+    case LOGOUT_USER:
+      return initialState;
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import {
     API_BASE_URL,
     IS_LOADING_PROFILE,
     SET_USER_DATA,
+    SET_HEADS_NAME,
 } from '../constants';
 
 import { notification } from 'antd';
@@ -36,6 +37,14 @@ export function setUserData(userData) {
     };
 }
 
+export function setHeadsNames(headsName) {
+  return {
+    type: SET_HEADS_NAME,
+    headsName,
+    isLoadingProfile: false,
+  };
+}
+
 export function loadingIndicator(toggle) {
     return {
         type: IS_LOADING_PROFILE,
@@ -62,4 +71,25 @@ return (dispatch) => {
     });
     });
 };
+}
+
+export function getHeadsNames() {
+  return (dispatch) => {
+    dispatch(loadingIndicator(true));
+    if (!localStorage.getItem(ACCESS_TOKEN)) {
+      dispatch(loadingIndicator(false));
+      return Promise.reject('No access token set.');
+    }
+    return request({
+      url: `${API_BASE_URL}/users/heads`,
+      method: 'GET',
+    }).then((response) => {
+      dispatch(setHeadsNames(response));
+    }).catch((error) => {
+      notification.error({
+        message: 'Company App',
+        description: error.message || 'Sorry! Could not load head of department names!',
+      });
+    });
+  };
 }

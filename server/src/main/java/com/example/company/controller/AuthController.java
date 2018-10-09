@@ -10,6 +10,7 @@ import com.example.company.repository.DepartmentRepository;
 import com.example.company.repository.RoleRepository;
 import com.example.company.repository.UserRepository;
 import com.example.company.security.JwtTokenProvider;
+import com.example.company.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,9 @@ public class AuthController {
     RoleRepository roleRepository;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     DepartmentRepository departmentRepository;
 
     @Autowired
@@ -69,8 +73,10 @@ public class AuthController {
         */
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         String jwt = tokenProvider.generateToken(authentication);
+
+        userService.saveLastLoginDate(loginRequest.getUsernameOrEmail());
+
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
@@ -102,7 +108,7 @@ public class AuthController {
 
         user.setDepartment(userDepartment);
 
-        Role userRole = roleRepository.findByName(RoleName.ROLE_CEO)
+        Role userRole = roleRepository.findByName(RoleName.ROLE_HEAD)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         /*

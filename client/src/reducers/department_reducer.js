@@ -1,4 +1,4 @@
-import { IS_LOADING_DEPARTMENT, SET_DEPARTMENT_LIST } from '../constants';
+import {IS_LOADING_DEPARTMENT, LOGOUT_USER, SET_DEPARTMENT_LIST} from '../constants';
 
 const initialState = {
     departments: [],
@@ -16,6 +16,8 @@ export default (state = initialState, action) => {
         departments: action.departments,
         isLoadingDepartments: action.isLoadingDepartments,
       };
+    case LOGOUT_USER:
+      return initialState;
     default:
       return state;
   }

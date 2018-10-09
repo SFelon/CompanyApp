@@ -14,6 +14,9 @@ public class UserProfile {
     private Date lastLogged;
     private String departmentName;
 
+    public UserProfile() {
+    }
+
     public UserProfile(String firstName, String lastName, String email, String privatePhone, String businessPhone,
                        Date dateOfEmployment, boolean isAccountActive, Date lastLogged, String departmentName) {
         this.firstName = firstName;

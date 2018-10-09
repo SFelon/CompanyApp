@@ -1,14 +1,45 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getDepartmenList } from '../../actions/department_action';
+import { getDepartmentList } from '../../actions/department_action';
 import { Col, Row, Card, Icon, Skeleton} from 'antd';
 import DepTable from '../departments/DepTable';
+import AddDepModal from '../departments/AddDepModal';
+import {getHeadsNames} from "../../actions/user_action";
 
 class CEO_Dashboard extends Component {
+  state = {
+    visible: false,
+  };
+
+  showModal = () => {
+    this.setState({ visible: true });
+    this.props.getHeadsNames();
+  }
+
+  handleCancel = () => {
+    this.setState({ visible: false });
+  }
+
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+
+      console.log('Received values of form: ', values);
+      form.resetFields();
+      this.setState({ visible: false });
+    });
+  }
+
+  saveFormRef = (formRef) => {
+    this.formRef = formRef;
+  }
 
   getDepartments = () => {
-    this.props.getDepartmenList();
+    this.props.getDepartmentList();
   }
 
   render() {
@@ -17,7 +48,7 @@ class CEO_Dashboard extends Component {
         <Row gutter={16}>
           <Col span={18}>
             <Skeleton loading={this.props.isLoading}>
-              <DepTable departments={this.props.departments}/>
+              <DepTable />
             </Skeleton>
           </Col>
           <Col span={6}>
@@ -25,7 +56,9 @@ class CEO_Dashboard extends Component {
                   actions={[
                   <Icon type="ordered-list"
                   onClick={this.getDepartments} />, 
-                  <Icon type="plus" /> 
+                  <Icon type="plus"
+                  onClick={this.showModal}
+                  />
                 ]}
             >
               Card content
@@ -38,6 +71,14 @@ class CEO_Dashboard extends Component {
             </Card>
           </Col>
         </Row>
+        <div>
+          <AddDepModal
+            wrappedComponentRef={this.saveFormRef}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}
+          />
+        </div>
       </div>
     );
   }
@@ -48,4 +89,4 @@ const mapStateToProps = (state) => ({
   isLoading: state.departments.isLoadingDepartments,
 });
 
-export default withRouter(connect(mapStateToProps, { getDepartmenList })(CEO_Dashboard));
+export default withRouter(connect(mapStateToProps, { getDepartmentList , getHeadsNames })(CEO_Dashboard));
