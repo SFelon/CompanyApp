@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="988647bf-1764-428e-b4db-650ae4041068" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/actions/department_action.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/department_action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/departments/DepTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/departments/DepTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/department_reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/department_reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/com/example/company/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/com/example/company/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/com/example/company/controller/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/com/example/company/controller/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/com/example/company/model/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/com/example/company/model/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/com/example/company/repository/DepartmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/com/example/company/repository/DepartmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/com/example/company/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/com/example/company/service/DepartmentService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +23,7 @@
         <counts>
           <entry key="PrivateRoute" value="142" />
           <entry key="auth_action" value="218" />
-          <entry key="js" value="8554" />
+          <entry key="js" value="9017" />
           <entry key="json" value="31" />
           <entry key="jsx" value="13" />
         </counts>
@@ -41,7 +32,7 @@
         <counts>
           <entry key="JSON" value="31" />
           <entry key="JSX Harmony" value="13" />
-          <entry key="JavaScript" value="8882" />
+          <entry key="JavaScript" value="9345" />
           <entry key="PLAIN_TEXT" value="32" />
         </counts>
       </usages-collector>
@@ -50,13 +41,13 @@
           <entry key="PrivateRoute" value="1" />
           <entry key="auth_action" value="2" />
           <entry key="css" value="8" />
-          <entry key="js" value="73" />
+          <entry key="js" value="76" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="8" />
-          <entry key="JavaScript" value="71" />
+          <entry key="JavaScript" value="74" />
           <entry key="PLAIN_TEXT" value="5" />
         </counts>
       </usages-collector>
@@ -67,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="51" column="35" lean-forward="true" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+            <state relative-caret-position="559">
+              <caret line="84" selection-start-line="84" selection-end-line="89" selection-end-column="12" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -98,30 +89,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/common/AppHeader.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="104" column="12" lean-forward="true" selection-start-line="104" selection-start-column="12" selection-end-line="104" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/actions/department_action.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="440">
@@ -143,19 +110,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/auth_reducer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/departments/DepTable.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="255">
+              <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -164,10 +122,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/common/AppHeader.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="811">
+              <caret line="104" column="12" lean-forward="true" selection-start-line="104" selection-start-column="12" selection-end-line="104" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/departments/AddDepModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="41" column="8" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+            <state relative-caret-position="476">
+              <caret line="28" column="3" lean-forward="true" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/departments/EditDepModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1236">
+              <caret line="114" column="2" lean-forward="true" selection-start-line="114" selection-start-column="2" selection-end-line="114" selection-end-column="2" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -236,6 +230,7 @@
         <option value="$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js" />
         <option value="$PROJECT_DIR$/src/actions/department_action.js" />
         <option value="$PROJECT_DIR$/src/components/departments/DepTable.js" />
+        <option value="$PROJECT_DIR$/src/components/departments/EditDepModal.js" />
       </list>
     </option>
   </component>
@@ -359,7 +354,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539177124336" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539179319907" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/departments/DepTable.css" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -398,12 +393,12 @@
       <option name="presentableId" value="Default" />
       <updated>1538640101282</updated>
       <workItem from="1538640102875" duration="41922000" />
-      <workItem from="1538979656865" duration="64158000" />
+      <workItem from="1538979656865" duration="66238000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106080000" />
+    <option name="totallyTimeSpent" value="108160000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -643,26 +638,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/AppHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="104" column="12" lean-forward="true" selection-start-line="104" selection-start-column="12" selection-end-line="104" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -684,26 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/departments/AddDepModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="41" column="8" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="51" column="35" lean-forward="true" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -734,12 +689,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="84" selection-start-line="84" selection-end-line="89" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/departments/AddDepModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="3" lean-forward="true" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/AppHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="811">
+          <caret line="104" column="12" lean-forward="true" selection-start-line="104" selection-start-column="12" selection-end-line="104" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/departments/DepTable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="255">
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/departments/EditDepModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1236">
+          <caret line="114" column="2" lean-forward="true" selection-start-line="114" selection-start-column="2" selection-end-line="114" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>

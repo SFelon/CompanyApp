@@ -3,6 +3,7 @@ import { Input, Table, Icon, Divider, Button, Popconfirm } from 'antd';
 import { connect } from 'react-redux';
 import { deleteDepartment } from '../../actions/department_action';
 import './DepTable.css'
+import EditDepModal from "./EditDepModal";
 
 class DepTable extends React.Component {
   
@@ -12,6 +13,7 @@ class DepTable extends React.Component {
       sortedInfo: null,
       searchText:'',
       prevDepartments: [],
+      editDepartment: {},
     };
   };
 
@@ -24,25 +26,67 @@ class DepTable extends React.Component {
     return null;
   }
 
+  handleEdit(id) {
+    this.setState({
+      editDepartment: this.state.prevDepartments.find(element => element.id === id)
+    });
+    this.showModal();
+  };
+
+  showModal = () => {
+    this.setState({ visible: true });
+  };
+
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
+
+  //TODO update of department
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields((err, values) => {
+      if(values.minSalary === undefined) {
+        values.minSalary = 0;
+      }
+      if (values.maxSalary === undefined) {
+        values.maxSalary = 0;
+      }
+      if (err) {
+        return;
+      }
+      const addDepRequest = Object.assign({}, values);
+      //this.props.addDepartment(addDepRequest);
+      form.resetFields();
+      this.setState({ visible: false });
+      //this.props.getDepartmentList();
+    });
+  };
+
+  saveFormRef = (formRef) => {
+    this.formRef = formRef;
+  };
+
+
+
   handleChange = (pagination, filters, sorter) => {
     this.setState({
       sortedInfo: sorter,
     });
-  }
+  };
 
   handleSearch = (selectedKeys, confirm) => () => {
     confirm();
     this.setState({ searchText: selectedKeys[0] });
-  }
+  };
 
   handleReset = clearFilters => () => {
     clearFilters();
     this.setState({ searchText: '' });
-  }
+  };
 
   handleDelete(id) {
     this.props.deleteDepartment({id});
-  }
+  };
 
   render() {
     let { sortedInfo } = this.state;
@@ -117,16 +161,16 @@ class DepTable extends React.Component {
         width: '15%',
         render: (text, record) => (
           <span>
-            <a href="javascript:;">
-            {`Edit `} 
-            <Icon type="edit"/>
-            </a>
+            <Button size={"small"} onClick={() => this.handleEdit(record.id)}>
+              {`Edit `}
+              <Icon type="edit"/>
+            </Button>
             <Divider type="vertical" />
             <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.id)}>
-            <a href="javascript:;">
-            {`Delete `} 
-            <Icon type="delete"/>
-            </a>
+              <Button size={"small"}>
+                {`Delete `}
+                <Icon type="delete"/>
+              </Button>
             </Popconfirm>
           </span>
         ),
@@ -137,6 +181,12 @@ class DepTable extends React.Component {
     return (
       <div>
         <Table columns={columns} dataSource={this.state.prevDepartments} rowKey={record => record.departmentName} onChange={this.handleChange} size="small"/>
+        <EditDepModal editedDepData={this.state.editDepartment}
+          wrappedComponentRef={this.saveFormRef}
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}
+        />
       </div>
     );
   } else {
