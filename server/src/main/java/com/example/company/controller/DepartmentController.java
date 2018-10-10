@@ -37,9 +37,13 @@ public class DepartmentController {
         return departmentService.getAllDepartments();
     }
 
-    @PostMapping("/departments")
+    @PostMapping
+    @PreAuthorize("hasRole('ROLE_CEO')")
     public ResponseEntity<?> registerDepartment(@Valid @RequestBody DepartmentRequest departmentRequest) {
-        if(departmentRepository.existsByDepartmentName(departmentRequest.getDepartmentName())) {
+        return departmentService.addNewDepartment(departmentRequest);
+
+    }
+        /*    if(departmentRepository.existsByDepartmentName(departmentRequest.getDepartmentName())) {
             return new ResponseEntity(new ApiResponse(false, "Department name already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
@@ -53,7 +57,6 @@ public class DepartmentController {
                 .fromCurrentContextPath().path("/{id}")
                 .buildAndExpand(result.getId()).toUri();
 
-        return ResponseEntity.created(location).body(new ApiResponse(true, "Department registered successfully"));
-    }
-
+        return ResponseEntity.created(location).body(new ApiResponse(true, "Department added successfully"));
+    }*/
 }

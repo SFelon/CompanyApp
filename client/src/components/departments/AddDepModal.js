@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getHeadsNames } from '../../actions/user_action';
-import { Modal, Form, Input, Cascader, InputNumber } from 'antd';
+import { Modal, Form, Input, Select, InputNumber } from 'antd';
 const FormItem = Form.Item;
+const Option = Select.Option;
 
 const AddDepModal = Form.create()(class extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [] };
+    this.state = {
+      data: [],
+      prevHeads: [],
+    };
   }
 
-  static getDerivedStateFromProps(props) {
-    if (props.heads) {
+  static getDerivedStateFromProps(props, state) {
+    if (props.heads && props.heads !== state.prevHeads) {
       let names = props.heads.map((element) => ({ 
       text: element.firstName + " " + element.lastName,
       value: element.username,
     }));
-      console.log(names);
         return {
           data: names,
+          prevHeads: props.heads,
         };
       }
     return null;
@@ -77,7 +81,7 @@ const AddDepModal = Form.create()(class extends Component {
               <Select
               placeholder="Select employee"
               >
-              {data.map(d => <Option key={d.value}>{d.text}</Option>)}
+              {this.state.data.map(d => <Option key={d.value}>{d.text}</Option>)}
               </Select>  
             )}
           </FormItem>

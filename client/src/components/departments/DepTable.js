@@ -43,7 +43,6 @@ class DepTable extends React.Component {
       title: 'Department Name',
       dataIndex: 'departmentName',
       key: 'departmentName',
-      defaultSortOrder: 'descend',
       sorter: (a,b) => sortScenario(a.departmentName, b.departmentName),
       sortOrder: sortedInfo.columnKey === 'departmentName' && sortedInfo.order,
       width: '30%',
@@ -120,7 +119,7 @@ class DepTable extends React.Component {
   if(this.props.departments && this.props.departments.length > 0) {
     return (
       <div>
-        <Table columns={columns} dataSource={this.props.departments} rowKey={record => record.id} onChange={this.handleChange} size="small"/>
+        <Table columns={columns} dataSource={this.props.departments} rowKey={record => record.departmentName} onChange={this.handleChange} size="small"/>
       </div>
     );
   } else {

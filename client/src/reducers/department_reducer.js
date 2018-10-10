@@ -9,6 +9,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case IS_LOADING_DEPARTMENT:
       return {
+        departments: state.departments,
         isLoadingDepartments: action.isLoadingDepartments,
       };
     case SET_DEPARTMENT_LIST:
@@ -17,11 +18,13 @@ export default (state = initialState, action) => {
         isLoadingDepartments: action.isLoadingDepartments,
       };
     case ADD_NEW_DEPARTMENT:
-    return {
-        ...state,
-        departments: [...state.departments, action.newDepartment],
-        isLoadingDepartments: action.isLoadingDepartments,
-      };
+      return Object.assign(
+        {},
+        state,
+        {
+          departments: state.departments.concat(action.newDepartment),
+          isLoadingDepartments: action.isLoadingDepartments,
+        });
     case LOGOUT_USER:
       return initialState;
     default:

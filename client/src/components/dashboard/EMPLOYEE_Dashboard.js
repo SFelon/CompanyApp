@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getDepartmentList } from '../../actions/department_action';
 import { Col, Row, Card, Icon, Skeleton} from 'antd';

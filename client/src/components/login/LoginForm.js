@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -8,7 +8,6 @@ import {
   Input,
 } from 'antd';
 import { signInAction, getCurrentUser } from '../../actions/auth_action';
-import LoadingIndicator from '../common/LoadingIndicator';
 
 const FormItem = Form.Item;
 

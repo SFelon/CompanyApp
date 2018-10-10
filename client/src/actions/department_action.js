@@ -81,11 +81,10 @@ export function addDepartment(addDepRequest) {
         method: 'POST',
         body: JSON.stringify(addDepRequest),
       }).then((response) => {
-          //what with response
-      }).then(setTimeout(() => {
-        dispatch(setNewDepartment(addDepRequest));
-      }, 500))
-        .catch((error) => {
+          if(response.status.ok) {
+              dispatch(setNewDepartment(addDepRequest));
+          }
+      }).catch((error) => {
           if (error.status === 401) {
             notification.error({
               message: 'Company App',
@@ -97,6 +96,8 @@ export function addDepartment(addDepRequest) {
               description: error.message || 'Sorry! Something went wrong. Please try again!',
             });
           }
-        });
+        }).finally(()=>{
+        dispatch(loadingIndicator(false));
+      });
     };
   }

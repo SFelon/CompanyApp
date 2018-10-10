@@ -10,6 +10,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case IS_LOADING:
       return {
+        currentUser: state.currentUser,
+        isAuthenticated: state.isAuthenticated,
         isLoading: action.isLoading,
       };
     case SET_CURRENT_USER:

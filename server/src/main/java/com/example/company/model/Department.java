@@ -49,10 +49,15 @@ public class Department {
 
     }
 
-    public Department(@NotBlank @Size(max = 40) String departmentName, @NotBlank @Size(max = 30) String city) {
+    public Department(@NotBlank @Size(max = 40) String departmentName, @NotBlank @Size(max = 30) String city,
+                      @Size(max = 60) String headOfDepartment, BigDecimal minSalary, BigDecimal maxSalary) {
         this.departmentName = departmentName;
         this.city = city;
+        this.headOfDepartment = headOfDepartment;
+        this.minSalary = minSalary;
+        this.maxSalary = maxSalary;
     }
+
 
     public Long getId() {
         return id;

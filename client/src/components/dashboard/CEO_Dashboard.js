@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getDepartmentList, addDepartment } from '../../actions/department_action';
 import { getHeadsNames } from "../../actions/user_action";
@@ -30,7 +30,6 @@ class CEO_Dashboard extends Component {
       if (err) {
         return;
       }
-      console.log('Received values of form: ', values);
       const addDepRequest = Object.assign({}, values);
       this.props.addDepartment(addDepRequest);
       form.resetFields();
