@@ -16,3 +16,4 @@ export const IS_LOADING_DEPARTMENT = 'is_loading_department';
 export const SET_DEPARTMENT_LIST = 'set_department_list';
 export const ADD_NEW_DEPARTMENT = 'add_new_department';
 export const DELETE_DEPARTMENT = 'delete_department';
+export const EDIT_DEPARTMENT = 'edit_department';

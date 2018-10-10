@@ -52,7 +52,7 @@ public class DepartmentService {
 
     public ResponseEntity<?> addNewDepartment(DepartmentRequest departmentRequest) {
         if(departmentRepository.existsByDepartmentName(departmentRequest.getDepartmentName())) {
-            return new ResponseEntity(new ApiResponse(false, "Department name already in use!"),
+            return new ResponseEntity<>(new ApiResponse(false, "Department name already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -68,18 +68,44 @@ public class DepartmentService {
         return ResponseEntity.created(location).body(new ApiResponse(true, "Department added successfully"));
     }
 
+    public ResponseEntity<?> updateDepartment(String id, DepartmentRequest departmentRequest) {
+        Long idLong = Long.parseLong(id);
+        if(!departmentRepository.existsById(idLong)) {
+            return new ResponseEntity<>(new ApiResponse(false, "Department with set id does not exist!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        try {
+            Department department = modelMapper.map(departmentRequest, Department.class);
+            departmentRepository.save(department);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse(false, "Could not update department in database!"),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(new ApiResponse(true, "Department deleted successfully!"),
+                HttpStatus.OK);
+    }
+
     public ResponseEntity<?> deleteDepartment(String id) {
         Long idLong = Long.parseLong(id);
         if(!departmentRepository.existsById(idLong)) {
-            return new ResponseEntity(new ApiResponse(false, "Department with set id does not exist!"),
+            return new ResponseEntity<>(new ApiResponse(false, "Department with set id does not exist!"),
                     HttpStatus.BAD_REQUEST);
         } else if(departmentRepository.countUsersByDepartmentId(idLong) > 0) {
             System.out.println(departmentRepository.countUsersByDepartmentId(idLong));
-            return new ResponseEntity(new ApiResponse(false, "Cannot delete department with saved employees!"),
+            return new ResponseEntity<>(new ApiResponse(false, "Cannot delete department with saved employees!"),
                     HttpStatus.BAD_REQUEST);
         }
-        departmentRepository.deleteById(idLong);
-        return new ResponseEntity(new ApiResponse(true, "Department deleted successfully!"),
+        try {
+            departmentRepository.deleteById(idLong);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse(false, "Could not delete department from database!"),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(new ApiResponse(true, "Department deleted successfully!"),
                 HttpStatus.OK);
     }
+
+
 }

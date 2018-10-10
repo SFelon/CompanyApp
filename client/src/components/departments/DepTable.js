@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Table, Icon, Divider, Button, Popconfirm } from 'antd';
 import { connect } from 'react-redux';
-import { deleteDepartment } from '../../actions/department_action';
+import { deleteDepartment, editDepartment } from '../../actions/department_action';
 import './DepTable.css'
 import EditDepModal from "./EditDepModal";
 
@@ -13,7 +13,7 @@ class DepTable extends React.Component {
       sortedInfo: null,
       searchText:'',
       prevDepartments: [],
-      editDepartment: {},
+      editDepartmentData: {},
     };
   };
 
@@ -24,11 +24,11 @@ class DepTable extends React.Component {
       };
     }
     return null;
-  }
+  };
 
   handleEdit(id) {
     this.setState({
-      editDepartment: this.state.prevDepartments.find(element => element.id === id)
+      editDepartmentData: this.state.prevDepartments.find(element => element.id === id)
     });
     this.showModal();
   };
@@ -41,7 +41,6 @@ class DepTable extends React.Component {
     this.setState({ visible: false });
   };
 
-  //TODO update of department
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
@@ -54,8 +53,8 @@ class DepTable extends React.Component {
       if (err) {
         return;
       }
-      const addDepRequest = Object.assign({}, values);
-      //this.props.addDepartment(addDepRequest);
+      const editDepRequest = Object.assign({}, values);
+      this.props.editDepartment(editDepRequest);
       form.resetFields();
       this.setState({ visible: false });
       //this.props.getDepartmentList();
@@ -65,8 +64,6 @@ class DepTable extends React.Component {
   saveFormRef = (formRef) => {
     this.formRef = formRef;
   };
-
-
 
   handleChange = (pagination, filters, sorter) => {
     this.setState({
@@ -153,12 +150,12 @@ class DepTable extends React.Component {
         key: 'headOfDepartment',
         sorter: (a, b) => sortScenario(a.headOfDepartment, b.headOfDepartment),
         sortOrder: sortedInfo.columnKey === 'headOfDepartment' && sortedInfo.order,
-        width: '30%',
+        width: '25%',
       },
       {
         title: 'Action',
         key: 'action',
-        width: '15%',
+        width: '20%',
         render: (text, record) => (
           <span>
             <Button size={"small"} onClick={() => this.handleEdit(record.id)}>
@@ -181,7 +178,7 @@ class DepTable extends React.Component {
     return (
       <div>
         <Table columns={columns} dataSource={this.state.prevDepartments} rowKey={record => record.departmentName} onChange={this.handleChange} size="small"/>
-        <EditDepModal editedDepData={this.state.editDepartment}
+        <EditDepModal editDepartmentData={this.state.editDepartmentData}
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
@@ -191,12 +188,12 @@ class DepTable extends React.Component {
     );
   } else {
     return null;
-  }
-}
-}
+  };
+};
+};
 
 const mapStateToProps = (state) => ({
   departments: state.departments.departments,
 });
 
-export default connect(mapStateToProps, { deleteDepartment })(DepTable);
+export default connect(mapStateToProps, { deleteDepartment, editDepartment })(DepTable);

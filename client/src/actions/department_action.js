@@ -5,6 +5,7 @@ import {
     SET_DEPARTMENT_LIST,
     ADD_NEW_DEPARTMENT,
     DELETE_DEPARTMENT,
+    EDIT_DEPARTMENT,
 } from '../constants';
 
 import { notification } from 'antd';
@@ -30,7 +31,7 @@ const request = (options) => {
       }));
   };
 
-export function setDepartmentList(departments) {
+function _departmentList(departments) {
     return {
         type: SET_DEPARTMENT_LIST,
         departments,
@@ -38,7 +39,7 @@ export function setDepartmentList(departments) {
     };
 }
 
-export function setNewDepartment(newDepartment) {
+function _addDepartment(newDepartment) {
     return {
         type: ADD_NEW_DEPARTMENT,
         newDepartment,
@@ -46,7 +47,7 @@ export function setNewDepartment(newDepartment) {
     };
 }
 
-export function _deleteDepartment({ id } = {}) {
+function _deleteDepartment({ id } = {}) {
   return {
     type: DELETE_DEPARTMENT,
     id,
@@ -54,7 +55,16 @@ export function _deleteDepartment({ id } = {}) {
   };
 }
 
-export function loadingIndicator(toggle) {
+function _editDepartment(editedDepartment, id) {
+  return {
+    type: EDIT_DEPARTMENT,
+    id,
+    editedDepartment,
+    isLoadingDepartments: false,
+  };
+}
+
+function loadingIndicator(toggle) {
     return {
         type: IS_LOADING_DEPARTMENT,
         isLoadingDepartments: toggle,
@@ -72,7 +82,7 @@ return (dispatch) => {
     url: `${API_BASE_URL}/departments`,
     method: 'GET',
     }).then((response) => {
-        dispatch(setDepartmentList(response));
+        dispatch(_departmentList(response));
     }).catch((error) => {
     notification.error({
         message: 'Company App',
@@ -91,7 +101,7 @@ export function addDepartment(addDepRequest) {
         body: JSON.stringify(addDepRequest),
       }).then((response) => {
           if(response.success === true) {
-              dispatch(setNewDepartment(addDepRequest));
+              dispatch(_addDepartment(addDepRequest));
           }
       }).catch((error) => {
           if (error.status === 401) {
@@ -143,3 +153,32 @@ export function deleteDepartment({id} = {}) {
     });
   };
 }
+
+export function editDepartment(editedDepartment, id) {
+    return (dispatch) => {
+      dispatch(loadingIndicator(true));
+      return request({
+        url: `${API_BASE_URL}/departments/${id}`,
+        method: 'PUT',
+        body: JSON.stringify(editedDepartment),
+      }).then((response) => {
+          if(response.success === true) {
+              dispatch(_editDepartment(editedDepartment, id));
+          }
+      }).catch((error) => {
+          if (error.status === 401) {
+            notification.error({
+              message: 'Company App',
+              description: 'You are not authorized to edit department!',
+            });
+          } else {
+            notification.error({
+              message: 'Company App',
+              description: error.message || 'Sorry! Something went wrong. Please try again!',
+            });
+          }
+        }).finally(()=>{
+        dispatch(loadingIndicator(false));
+      });
+    };
+  }

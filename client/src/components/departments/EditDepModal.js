@@ -56,7 +56,7 @@ const EditDepModal = Form.create()(class extends Component {
               {...formItemLayout}
               label="Department Name">
               {getFieldDecorator('departmentName', {
-                initialValue: this.props.editedDepData.departmentName,
+                initialValue: this.props.editDepartmentData.departmentName,
                 rules: [{
                   required: true, message: 'Please input the department name!'
                 }],
@@ -68,7 +68,7 @@ const EditDepModal = Form.create()(class extends Component {
               {...formItemLayout}
               label="City">
               {getFieldDecorator('city', {
-                initialValue: this.props.editedDepData.city,
+                initialValue: this.props.editDepartmentData.city,
                 rules: [{ required: true, message: 'Please input the city!' }],
               })(
                 <Input />
@@ -79,7 +79,7 @@ const EditDepModal = Form.create()(class extends Component {
               label="Head of Department"
             >
               {getFieldDecorator('headOfDepartment', {
-                initialValue: this.props.editedDepData.headOfDepartment,
+                initialValue: this.props.editDepartmentData.headOfDepartment,
                 rules: [{ type: 'string', required: true, message: 'Please select the head of department!' }],
               })(
                 <Select
@@ -93,7 +93,7 @@ const EditDepModal = Form.create()(class extends Component {
               {...formItemLayout}
               label="Minimum Salary">
               {getFieldDecorator('minSalary', {
-                initialValue: this.props.editedDepData.minSalary,
+                initialValue: this.props.editDepartmentData.minSalary,
               })(
                 <InputNumber min={0} max={1000000} step={100} />
               )}
@@ -102,7 +102,7 @@ const EditDepModal = Form.create()(class extends Component {
               {...formItemLayout}
               label="Maximum Salary">
               {getFieldDecorator('maxSalary', {
-                initialValue: this.props.editedDepData.maxSalary,
+                initialValue: this.props.editDepartmentData.maxSalary,
               })(
                 <InputNumber min={0} max={1000000} step={1000} />
               )}
