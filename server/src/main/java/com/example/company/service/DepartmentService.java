@@ -96,6 +96,7 @@ public class DepartmentService {
             return new ResponseEntity<>(new ApiResponse(false, "Cannot delete department with saved employees!"),
                     HttpStatus.BAD_REQUEST);
         }
+
         try {
             departmentRepository.deleteById(idLong);
         } catch (Exception e) {
@@ -106,6 +107,4 @@ public class DepartmentService {
         return new ResponseEntity<>(new ApiResponse(true, "Department deleted successfully!"),
                 HttpStatus.OK);
     }
-
-
 }

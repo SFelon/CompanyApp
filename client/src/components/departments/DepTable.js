@@ -158,6 +158,11 @@ class DepTable extends React.Component {
         width: '20%',
         render: (text, record) => (
           <span>
+            <Button size={"small"}>
+              {`View `}
+              <Icon type="solution"/>
+            </Button>
+            <Divider type="vertical" />
             <Button size={"small"} onClick={() => this.handleEdit(record.id)}>
               {`Edit `}
               <Icon type="edit"/>

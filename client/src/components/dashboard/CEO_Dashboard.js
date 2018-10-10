@@ -5,10 +5,7 @@ import { getDepartmentList, addDepartment } from '../../actions/department_actio
 import { getHeadsNames } from "../../actions/user_action";
 import DepTable from '../departments/DepTable';
 import AddDepModal from '../departments/AddDepModal';
-import { Col, Row, Card, Icon, Skeleton} from 'antd';
-
-
-
+import { Col, Row, Card, Icon, Skeleton, Tooltip} from 'antd';
 
 class CEO_Dashboard extends Component {
   state = {
@@ -64,18 +61,24 @@ class CEO_Dashboard extends Component {
           <Col span={6}>
             <Card title={<span><Icon type='cluster' style={{padding: '0 8px', fontSize: '32px'}}/> Departments</span>}
                   actions={[
-                  <Icon type="ordered-list"
-                  onClick={this.getDepartments} />, 
-                  <Icon type="plus"
-                  onClick={this.showModal}
-                  />
+                  <Tooltip placement="bottomLeft" title="List departments">  
+                    <Icon type="ordered-list"
+                    onClick={this.getDepartments} />
+                  </Tooltip>,
+                  <Tooltip placement="bottomLeft" title="Add new department">   
+                    <Icon type="plus"
+                    onClick={this.showModal}
+                    />
+                  </Tooltip>,
                 ]}
             >
-              Card content
+              {`No of departments: ${this.props.departments.length}`}
             </Card>
             <br></br>
             <Card title={<span><Icon type='team' style={{ padding: '0 8px', fontSize: '32px'}}/> Users</span>}
-                  actions={[<Icon type="ordered-list" />, <Icon type="edit" /> ]}
+                  actions={[
+                  <Icon type="ordered-list" />, 
+                  <Icon type="edit" /> ]}
             >
               Card content
             </Card>
