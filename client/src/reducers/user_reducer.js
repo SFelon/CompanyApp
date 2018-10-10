@@ -1,15 +1,20 @@
-import {IS_LOADING_PROFILE, LOGOUT_USER, SET_USER_DATA, SET_HEADS_NAME} from '../constants';
+import { 
+  IS_LOADING_PROFILE,
+  LOGOUT_USER,
+  SET_USER_DATA,
+  SET_HEADS_NAME, 
+} from '../constants';
 
 const initialState = {
   userData: {
-    firstName: "",
-    lastName: "",
-    privatePhone: "",
-    businessPhone: "",
-    dateOfEmployment: "",
-    lastLogged: "",
+    firstName: '',
+    lastName: '',
+    privatePhone: '',
+    businessPhone: '',
+    dateOfEmployment: '',
+    lastLogged: '',
     accountActive: false,
-    department: "",
+    department: '',
   },
   headsName: [],
   isLoadingProfile: false,

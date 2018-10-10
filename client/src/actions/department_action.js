@@ -90,7 +90,7 @@ return (dispatch) => {
     });
     });
 };
-}
+};
 
 export function addDepartment(addDepRequest) {
     return (dispatch) => {
@@ -119,7 +119,7 @@ export function addDepartment(addDepRequest) {
         dispatch(loadingIndicator(false));
       });
     };
-  }
+};
 
 
 export function deleteDepartment({id} = {}) {
@@ -152,33 +152,33 @@ export function deleteDepartment({id} = {}) {
       dispatch(loadingIndicator(false));
     });
   };
-}
+};
 
 export function editDepartment(editedDepartment, id) {
     return (dispatch) => {
-      dispatch(loadingIndicator(true));
-      return request({
+        dispatch(loadingIndicator(true));
+        return request({
         url: `${API_BASE_URL}/departments/${id}`,
         method: 'PUT',
         body: JSON.stringify(editedDepartment),
-      }).then((response) => {
-          if(response.success === true) {
-              dispatch(_editDepartment(editedDepartment, id));
-          }
-      }).catch((error) => {
-          if (error.status === 401) {
+        }).then((response) => {
+            if(response.success === true) {
+                dispatch(_editDepartment(editedDepartment, id));
+            }
+        }).catch((error) => {
+            if (error.status === 401) {
             notification.error({
-              message: 'Company App',
-              description: 'You are not authorized to edit department!',
+                message: 'Company App',
+                description: 'You are not authorized to edit department!',
             });
-          } else {
+            } else {
             notification.error({
-              message: 'Company App',
-              description: error.message || 'Sorry! Something went wrong. Please try again!',
+                message: 'Company App',
+                description: error.message || 'Sorry! Something went wrong. Please try again!',
             });
-          }
+            }
         }).finally(()=>{
         dispatch(loadingIndicator(false));
-      });
-    };
-  }
+        });
+  };
+};

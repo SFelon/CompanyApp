@@ -29,7 +29,7 @@ const request = (options) => {
       }));
   };
 
-export function setUserData(userData) {
+function setUserData(userData) {
     return {
         type: SET_USER_DATA,
         userData,
@@ -37,7 +37,7 @@ export function setUserData(userData) {
     };
 }
 
-export function setHeadsNames(headsName) {
+function setHeadsNames(headsName) {
   return {
     type: SET_HEADS_NAME,
     headsName,
@@ -45,7 +45,7 @@ export function setHeadsNames(headsName) {
   };
 }
 
-export function loadingIndicator(toggle) {
+function loadingIndicator(toggle) {
     return {
         type: IS_LOADING_PROFILE,
         isLoadingProfile: toggle,
@@ -71,7 +71,7 @@ return (dispatch) => {
     });
     });
 };
-}
+};
 
 export function getHeadsNames() {
   return (dispatch) => {
@@ -92,4 +92,4 @@ export function getHeadsNames() {
       });
     });
   };
-}
+};

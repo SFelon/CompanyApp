@@ -23,7 +23,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { role: '' };
-  }
+  };
 
   static getDerivedStateFromProps(props) {
     if (props.isAuthenticated === true) {
@@ -33,15 +33,15 @@ class App extends Component {
         return {
           role: role,
         };
-      }
-    }
+      };
+    };
     return null;
-  }
+  };
 
   render() {
     if (this.props.isLoading) {
       return <LoadingIndicator />;
-    }
+    };
 
     return (
       <Layout className="app-container">
@@ -66,8 +66,8 @@ class App extends Component {
         </Content>
       </Layout>
     );
-  }
-}
+  };
+};
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.currentUser,

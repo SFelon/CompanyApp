@@ -31,29 +31,28 @@ export default (state = initialState, action) => {
         {
           departments: state.departments.concat(action.newDepartment),
           isLoadingDepartments: action.isLoadingDepartments,
-        });
+        }
+        );
     case DELETE_DEPARTMENT:
       return {
-        departments: state.departments.filter(({id}) => id !== action.id),
+        departments: state.departments.filter(({ id }) => id !== action.id),
         isLoadingDepartments: action.isLoadingDepartments,
         };
     case EDIT_DEPARTMENT:
-        return { 
-        department: state.departments.map(department => {
+        return {
+        department: state.departments.map((department) => {
             if (department.id === action.id) {
             return {
                 ...state.departments,
-                ...action.editedDepartment
-            };
-            } else {
+                ...action.editedDepartment,
+            }};
             return state.departments;
-            }
         }),
         isLoadingDepartments: action.isLoadingDepartments,
-    }  
+        };
     case LOGOUT_USER:
       return initialState;
     default:
       return state;
-  }
+  };
 };

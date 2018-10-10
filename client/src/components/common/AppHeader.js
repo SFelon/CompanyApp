@@ -26,7 +26,7 @@ class AppHeader extends Component {
         this.props.history.push("/");
         break;
       default:
-    }
+    };
   };
 
   showModal = () => {

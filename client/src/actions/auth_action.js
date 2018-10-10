@@ -7,7 +7,6 @@ import {
   LOGOUT_USER,
 } from '../constants';
 
-
 const request = (options) => {
   const headers = new Headers({
     'Content-Type': 'application/json',
@@ -29,21 +28,27 @@ const request = (options) => {
     }));
 };
 
-export function setCurrentUser(currentUser) {
+function setCurrentUser(currentUser) {
   return {
     type: SET_CURRENT_USER,
     currentUser,
     isAuthenticated: true,
     isLoading: false,
   };
-}
+};
 
-export function loadingUser(toggle) {
+function logoutUser() {
+  return {
+    type: LOGOUT_USER,
+  };
+};
+
+function loadingUser(toggle) {
   return {
     type: IS_LOADING,
     isLoading: toggle,
   };
-}
+};
 
 export function getCurrentUser() {
   return (dispatch) => {
@@ -64,14 +69,7 @@ export function getCurrentUser() {
       });
     });
   };
-}
-
-export function logoutUser() {
-  return {
-    type: LOGOUT_USER,
-  };
-}
-
+};
 
 export function signInAction(loginRequest) {
   return (dispatch) => {
@@ -99,7 +97,7 @@ export function signInAction(loginRequest) {
         }
       });
   };
-}
+};
 
 export function logoutAction() {
   return (dispatch) => {
@@ -110,4 +108,4 @@ export function logoutAction() {
       description: 'You are successfully logged out.',
     }), 500)
   };
-}
+};

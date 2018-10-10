@@ -12,7 +12,7 @@ const AddDepModal = Form.create()(class extends Component {
       data: [],
       prevHeads: [],
     };
-  }
+  };
 
   static getDerivedStateFromProps(props, state) {
     if (props.heads && props.heads !== state.prevHeads) {
@@ -24,9 +24,9 @@ const AddDepModal = Form.create()(class extends Component {
           data: names,
           prevHeads: props.heads,
         };
-      }
+      };
     return null;
-  }
+  };
 
   render() {
     const { visible, onCancel, onCreate, form } = this.props;

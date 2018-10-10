@@ -1,12 +1,12 @@
 import React from 'react';
-import { Input, Table, Icon, Divider, Button, Popconfirm } from 'antd';
 import { connect } from 'react-redux';
 import { deleteDepartment, editDepartment } from '../../actions/department_action';
+import EditDepModal from './EditDepModal';
+import { Input, Table, Icon, Divider, Button, Popconfirm } from 'antd';
 import './DepTable.css'
-import EditDepModal from "./EditDepModal";
+
 
 class DepTable extends React.Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class DepTable extends React.Component {
       return {
         prevDepartments: props.departments,
       };
-    }
+    };
     return null;
   };
 
@@ -92,7 +92,7 @@ class DepTable extends React.Component {
     function sortScenario(a,b){
       a = a || '';
       b = b || '';
-      return b.localeCompare(a, 'pl', {sensitivity: 'base'});
+      return b.localeCompare(a, 'pl', { sensitivity: 'base' });
     };
 
     const columns = [{
@@ -103,19 +103,19 @@ class DepTable extends React.Component {
       sortOrder: sortedInfo.columnKey === 'departmentName' && sortedInfo.order,
       width: '30%',
       filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-        <div className="custom-filter-dropdown">
+        <div className='custom-filter-dropdown'>
           <Input
             ref={ele => this.searchInput = ele}
-            placeholder="Search Name"
+            placeholder='Search Name'
             value={selectedKeys[0]}
             onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
             onPressEnter={this.handleSearch(selectedKeys, confirm)}
           />
-          <Button type="primary" onClick={this.handleSearch(selectedKeys, confirm)}>Search</Button>
+          <Button type='primary' onClick={this.handleSearch(selectedKeys, confirm)}>Search</Button>
           <Button onClick={this.handleReset(clearFilters)}>Reset</Button>
         </div>
       ),
-      filterIcon: filtered => <Icon type="search" style={{ color: filtered ? '#13c2c2' : '#aaa' }} />,
+      filterIcon: filtered => <Icon type='search' style={{ color: filtered ? '#13c2c2' : '#aaa' }} />,
       onFilter: (value, record) => record.departmentName.toLowerCase().includes(value.toLowerCase()),
       onFilterDropdownVisibleChange: (visible) => {
         if (visible) {
@@ -130,7 +130,7 @@ class DepTable extends React.Component {
           <span>
             {text.split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i')).map((fragment, i) => (
               fragment.toLowerCase() === searchText.toLowerCase()
-                ? <span key={i} className="highlight">{fragment}</span> : fragment 
+                ? <span key={i} className='highlight'>{fragment}</span> : fragment 
             ))}
           </span>
         ) : text;
@@ -158,20 +158,20 @@ class DepTable extends React.Component {
         width: '20%',
         render: (text, record) => (
           <span>
-            <Button size={"small"}>
+            <Button size={'small'}>
               {`View `}
-              <Icon type="solution"/>
+              <Icon type='solution'/>
             </Button>
-            <Divider type="vertical" />
-            <Button size={"small"} onClick={() => this.handleEdit(record.id)}>
+            <Divider type='vertical' />
+            <Button size={'small'} onClick={() => this.handleEdit(record.id)}>
               {`Edit `}
-              <Icon type="edit"/>
+              <Icon type='edit'/>
             </Button>
-            <Divider type="vertical" />
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.id)}>
-              <Button size={"small"}>
+            <Divider type='vertical' />
+            <Popconfirm title='Sure to delete?' onConfirm={() => this.handleDelete(record.id)}>
+              <Button size={'small'}>
                 {`Delete `}
-                <Icon type="delete"/>
+                <Icon type='delete'/>
               </Button>
             </Popconfirm>
           </span>
@@ -182,7 +182,7 @@ class DepTable extends React.Component {
   if(this.props.departments && this.props.departments.length > 0) {
     return (
       <div>
-        <Table columns={columns} dataSource={this.state.prevDepartments} rowKey={record => record.departmentName} onChange={this.handleChange} size="small"/>
+        <Table columns={columns} dataSource={this.state.prevDepartments} rowKey={record => record.departmentName} onChange={this.handleChange} size='small'/>
         <EditDepModal editDepartmentData={this.state.editDepartmentData}
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
