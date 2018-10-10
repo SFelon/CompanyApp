@@ -4,18 +4,9 @@
     <list default="true" id="988647bf-1764-428e-b4db-650ae4041068" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/department_action.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/department_action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/user_action.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/user_action.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dashboard/EMPLOYEE_Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboard/EMPLOYEE_Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/departments/AddDepModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/departments/AddDepModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/departments/DepTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/departments/DepTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/login/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/auth_reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/auth_reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/department_reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/department_reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/com/example/company/controller/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/com/example/company/controller/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/com/example/company/model/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/com/example/company/model/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/com/example/company/payload/DepartmentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/com/example/company/payload/DepartmentRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/com/example/company/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/com/example/company/service/DepartmentService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +27,7 @@
         <counts>
           <entry key="PrivateRoute" value="142" />
           <entry key="auth_action" value="218" />
-          <entry key="js" value="7692" />
+          <entry key="js" value="7955" />
           <entry key="json" value="31" />
           <entry key="jsx" value="13" />
         </counts>
@@ -45,7 +36,7 @@
         <counts>
           <entry key="JSON" value="31" />
           <entry key="JSX Harmony" value="13" />
-          <entry key="JavaScript" value="8020" />
+          <entry key="JavaScript" value="8283" />
           <entry key="PLAIN_TEXT" value="32" />
         </counts>
       </usages-collector>
@@ -53,13 +44,13 @@
         <counts>
           <entry key="PrivateRoute" value="1" />
           <entry key="auth_action" value="2" />
-          <entry key="css" value="7" />
+          <entry key="css" value="8" />
           <entry key="js" value="64" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="7" />
+          <entry key="CSS" value="8" />
           <entry key="JavaScript" value="62" />
           <entry key="PLAIN_TEXT" value="5" />
         </counts>
@@ -92,8 +83,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+            <state relative-caret-position="593">
+              <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,8 +104,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/departments/AddDepModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="1700">
+              <caret line="100" column="30" selection-start-line="100" selection-start-column="30" selection-end-line="100" selection-end-column="30" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -119,11 +113,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/login/LoginForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="658">
+              <caret line="69" column="3" lean-forward="true" selection-start-line="69" selection-start-column="3" selection-end-line="69" selection-end-column="3" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -134,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reducers/department_reducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+            <state relative-caret-position="306">
+              <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -143,29 +137,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/actions/department_action.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
-              <caret line="94" column="37" lean-forward="true" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
+            <state relative-caret-position="459">
+              <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App/App.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/components/departments/DepTable.css">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/departments/DepTable.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="678">
-              <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="4" />
+            <state relative-caret-position="493">
+              <caret line="32" column="4" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -226,14 +213,14 @@
         <option value="$PROJECT_DIR$/src/constants/index.js" />
         <option value="$PROJECT_DIR$/src/reducers/user_reducer.js" />
         <option value="$PROJECT_DIR$/src/reducers/auth_reducer.js" />
-        <option value="$PROJECT_DIR$/src/components/departments/DepTable.js" />
         <option value="$PROJECT_DIR$/src/actions/user_action.js" />
-        <option value="$PROJECT_DIR$/src/actions/department_action.js" />
-        <option value="$PROJECT_DIR$/src/components/departments/AddDepModal.js" />
         <option value="$PROJECT_DIR$/src/reducers/department_reducer.js" />
-        <option value="$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js" />
         <option value="$PROJECT_DIR$/src/components/dashboard/EMPLOYEE_Dashboard.js" />
         <option value="$PROJECT_DIR$/src/components/login/LoginForm.js" />
+        <option value="$PROJECT_DIR$/src/components/departments/AddDepModal.js" />
+        <option value="$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/actions/department_action.js" />
+        <option value="$PROJECT_DIR$/src/components/departments/DepTable.js" />
       </list>
     </option>
   </component>
@@ -357,7 +344,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539156831704" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539160293940" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/departments/DepTable.css" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -396,15 +383,16 @@
       <option name="presentableId" value="Default" />
       <updated>1538640101282</updated>
       <workItem from="1538640102875" duration="41922000" />
-      <workItem from="1538979656865" duration="50556000" />
+      <workItem from="1538979656865" duration="54013000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92478000" />
+    <option name="totallyTimeSpent" value="95935000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.246875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -603,9 +591,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/departments/felon.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/departments/DepTable.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/constants/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -674,47 +659,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/department_action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="94" column="37" lean-forward="true" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/departments/AddDepModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/departments/DepTable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="130" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/department_reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/dashboard/EMPLOYEE_Dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -724,10 +668,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/login/LoginForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="658">
+          <caret line="69" column="3" lean-forward="true" selection-start-line="69" selection-start-column="3" selection-end-line="69" selection-end-column="3" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/department_reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="8" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/departments/AddDepModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1700">
+          <caret line="100" column="30" selection-start-line="100" selection-start-column="30" selection-end-line="100" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/dashboard/CEO_Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="593">
+          <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/department_action.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/departments/DepTable.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/departments/DepTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="32" column="4" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

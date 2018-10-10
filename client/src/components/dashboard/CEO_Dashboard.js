@@ -27,6 +27,12 @@ class CEO_Dashboard extends Component {
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
+      if(values.minSalary === undefined) {
+        values.minSalary = 0;
+      }
+      if (values.maxSalary === undefined) {
+        values.maxSalary = 0;
+      }
       if (err) {
         return;
       }

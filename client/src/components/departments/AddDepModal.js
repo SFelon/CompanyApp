@@ -88,14 +88,18 @@ const AddDepModal = Form.create()(class extends Component {
           <FormItem
             {...formItemLayout}
             label="Minimum Salary">
-            {getFieldDecorator('minSalary')(
+            {getFieldDecorator('minSalary', {
+              initialValue: 0,
+            })(
               <InputNumber min={0} max={1000000} step={100} />
             )}
           </FormItem>
           <FormItem
             {...formItemLayout}
             label="Maximum Salary">
-            {getFieldDecorator('maxSalary')(
+            {getFieldDecorator('maxSalary', {
+              initialValue: 0,
+            })(
               <InputNumber min={0} max={1000000} step={1000} />
             )}
           </FormItem>

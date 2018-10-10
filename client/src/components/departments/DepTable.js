@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Table, Icon, Divider, Button } from 'antd';
+import { Input, Table, Icon, Divider, Button, Popconfirm } from 'antd';
 import { connect } from 'react-redux';
 import './DepTable.css'
 
@@ -28,6 +28,11 @@ class DepTable extends React.Component {
     clearFilters();
     this.setState({ searchText: '' });
   }
+
+  handleDelete(department) {
+
+  }
+
 
   render() {
     let { sortedInfo } = this.state;
@@ -107,10 +112,12 @@ class DepTable extends React.Component {
             <Icon type="edit"/>
             </a>
             <Divider type="vertical" />
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
             <a href="javascript:;">
             {`Delete `} 
             <Icon type="delete"/>
             </a>
+            </Popconfirm>
           </span>
         ),
       }

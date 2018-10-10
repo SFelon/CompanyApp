@@ -81,7 +81,7 @@ export function addDepartment(addDepRequest) {
         method: 'POST',
         body: JSON.stringify(addDepRequest),
       }).then((response) => {
-          if(response.status.ok) {
+          if(response.status === 'ok') {
               dispatch(setNewDepartment(addDepRequest));
           }
       }).catch((error) => {
