@@ -18,11 +18,11 @@ class CEO_Dashboard extends Component {
   showModal = () => {
     this.setState({ visible: true });
     this.props.getHeadsNames();
-  }
+  };
 
   handleCancel = () => {
     this.setState({ visible: false });
-  }
+  };
 
   handleCreate = () => {
     const form = this.formRef.props.form;
@@ -40,16 +40,17 @@ class CEO_Dashboard extends Component {
       this.props.addDepartment(addDepRequest);
       form.resetFields();
       this.setState({ visible: false });
+      this.props.getDepartmentList();
     });
-  }
+  };
 
   saveFormRef = (formRef) => {
     this.formRef = formRef;
-  }
+  };
 
   getDepartments = () => {
     this.props.getDepartmentList();
-  }
+  };
 
   render() {
     return (

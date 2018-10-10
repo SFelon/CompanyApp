@@ -67,4 +67,19 @@ public class DepartmentService {
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "Department added successfully"));
     }
+
+    public ResponseEntity<?> deleteDepartment(String id) {
+        Long idLong = Long.parseLong(id);
+        if(!departmentRepository.existsById(idLong)) {
+            return new ResponseEntity(new ApiResponse(false, "Department with set id does not exist!"),
+                    HttpStatus.BAD_REQUEST);
+        } else if(departmentRepository.countUsersByDepartmentId(idLong) > 0) {
+            System.out.println(departmentRepository.countUsersByDepartmentId(idLong));
+            return new ResponseEntity(new ApiResponse(false, "Cannot delete department with saved employees!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        departmentRepository.deleteById(idLong);
+        return new ResponseEntity(new ApiResponse(true, "Department deleted successfully!"),
+                HttpStatus.OK);
+    }
 }

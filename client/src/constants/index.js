@@ -10,8 +10,9 @@ export const IS_LOADING = 'is_loading';
 export const SET_USER_DATA = 'set_user_data';
 export const IS_LOADING_PROFILE = 'is_loading_profile';
 export const SET_HEADS_NAME = 'set_heads_name';
-export const ADD_NEW_DEPARTMENT = 'add_new_department';
 
 //department_actions
 export const IS_LOADING_DEPARTMENT = 'is_loading_department';
 export const SET_DEPARTMENT_LIST = 'set_department_list';
+export const ADD_NEW_DEPARTMENT = 'add_new_department';
+export const DELETE_DEPARTMENT = 'delete_department';

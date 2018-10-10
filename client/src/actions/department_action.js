@@ -4,6 +4,7 @@ import {
     IS_LOADING_DEPARTMENT,
     SET_DEPARTMENT_LIST,
     ADD_NEW_DEPARTMENT,
+    DELETE_DEPARTMENT,
 } from '../constants';
 
 import { notification } from 'antd';
@@ -45,6 +46,14 @@ export function setNewDepartment(newDepartment) {
     };
 }
 
+export function _deleteDepartment({ id } = {}) {
+  return {
+    type: DELETE_DEPARTMENT,
+    id,
+    isLoadingDepartments: false,
+  };
+}
+
 export function loadingIndicator(toggle) {
     return {
         type: IS_LOADING_DEPARTMENT,
@@ -81,7 +90,7 @@ export function addDepartment(addDepRequest) {
         method: 'POST',
         body: JSON.stringify(addDepRequest),
       }).then((response) => {
-          if(response.status === 'ok') {
+          if(response.success === true) {
               dispatch(setNewDepartment(addDepRequest));
           }
       }).catch((error) => {
@@ -101,3 +110,36 @@ export function addDepartment(addDepRequest) {
       });
     };
   }
+
+
+export function deleteDepartment({id} = {}) {
+  return (dispatch) => {
+    dispatch(loadingIndicator(true));
+    return request({
+      url: `${API_BASE_URL}/departments/${id}`,
+      method: 'DELETE',
+    }).then((response) => {
+      if(response.success === true) {
+        dispatch(_deleteDepartment({id}));
+        setTimeout(notification.success({
+          message: 'Company App',
+          description: 'Department deleted successfully!',
+        }), 500)
+      }
+    }).catch((error) => {
+      if (error.status === 401) {
+        notification.error({
+          message: 'Company App',
+          description: 'You are not authorized to delete department!',
+        });
+      } else {
+        notification.error({
+          message: 'Company App',
+          description: error.message || 'Sorry! Something went wrong. Please try again!',
+        });
+      }
+    }).finally(()=>{
+      dispatch(loadingIndicator(false));
+    });
+  };
+}

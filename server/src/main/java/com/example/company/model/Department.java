@@ -42,6 +42,7 @@ public class Department {
             fetch = FetchType.EAGER,
             orphanRemoval = true
     )
+    @Fetch(value = FetchMode.SELECT)
     private List<User> users = new ArrayList<>();
 
 

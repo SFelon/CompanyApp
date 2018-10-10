@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, Table, Icon, Divider, Button, Popconfirm } from 'antd';
 import { connect } from 'react-redux';
+import { deleteDepartment } from '../../actions/department_action';
 import './DepTable.css'
 
 class DepTable extends React.Component {
@@ -10,8 +11,18 @@ class DepTable extends React.Component {
     this.state = {
       sortedInfo: null,
       searchText:'',
+      prevDepartments: [],
     };
   };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.departments && props.departments.length !== state.prevDepartments.length) {
+      return {
+        prevDepartments: props.departments,
+      };
+    }
+    return null;
+  }
 
   handleChange = (pagination, filters, sorter) => {
     this.setState({
@@ -29,10 +40,9 @@ class DepTable extends React.Component {
     this.setState({ searchText: '' });
   }
 
-  handleDelete(department) {
-
+  handleDelete(id) {
+    this.props.deleteDepartment({id});
   }
-
 
   render() {
     let { sortedInfo } = this.state;
@@ -112,7 +122,7 @@ class DepTable extends React.Component {
             <Icon type="edit"/>
             </a>
             <Divider type="vertical" />
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.id)}>
             <a href="javascript:;">
             {`Delete `} 
             <Icon type="delete"/>
@@ -126,7 +136,7 @@ class DepTable extends React.Component {
   if(this.props.departments && this.props.departments.length > 0) {
     return (
       <div>
-        <Table columns={columns} dataSource={this.props.departments} rowKey={record => record.departmentName} onChange={this.handleChange} size="small"/>
+        <Table columns={columns} dataSource={this.state.prevDepartments} rowKey={record => record.departmentName} onChange={this.handleChange} size="small"/>
       </div>
     );
   } else {
@@ -139,4 +149,4 @@ const mapStateToProps = (state) => ({
   departments: state.departments.departments,
 });
 
-export default connect(mapStateToProps, null)(DepTable);
+export default connect(mapStateToProps, { deleteDepartment })(DepTable);

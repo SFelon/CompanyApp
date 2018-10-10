@@ -43,20 +43,10 @@ public class DepartmentController {
         return departmentService.addNewDepartment(departmentRequest);
 
     }
-        /*    if(departmentRepository.existsByDepartmentName(departmentRequest.getDepartmentName())) {
-            return new ResponseEntity(new ApiResponse(false, "Department name already in use!"),
-                    HttpStatus.BAD_REQUEST);
-        }
 
-        // Creating new department
-        Department department = new Department(departmentRequest.getDepartmentName(),departmentRequest.getCity());
-
-        Department result = departmentRepository.save(department);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/{id}")
-                .buildAndExpand(result.getId()).toUri();
-
-        return ResponseEntity.created(location).body(new ApiResponse(true, "Department added successfully"));
-    }*/
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_CEO')")
+    public ResponseEntity<?> deleteDepartment(@PathVariable("id") String id) {
+        return departmentService.deleteDepartment(id);
+    }
 }

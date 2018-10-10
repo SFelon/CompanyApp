@@ -108,7 +108,7 @@ public class AuthController {
 
         user.setDepartment(userDepartment);
 
-        Role userRole = roleRepository.findByName(RoleName.ROLE_HEAD)
+        Role userRole = roleRepository.findByName(RoleName.ROLE_CEO)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         /*
