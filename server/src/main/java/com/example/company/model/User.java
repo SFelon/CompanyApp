@@ -221,4 +221,24 @@ public class User {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", privatePhone='" + privatePhone + '\'' +
+                ", businessPhone='" + businessPhone + '\'' +
+                ", salary=" + salary +
+                ", dateOfEmployment=" + dateOfEmployment +
+                ", isAccountActive=" + isAccountActive +
+                ", lastLogged=" + lastLogged +
+                ", roles=" + roles +
+                ", department=" + department +
+                '}';
+    }
 }

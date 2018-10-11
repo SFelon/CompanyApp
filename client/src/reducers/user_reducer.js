@@ -24,15 +24,19 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case IS_LOADING_PROFILE:
       return {
+        userData: state.userData,
+        headsName: state.headsName,
         isLoadingProfile: action.isLoadingProfile,
       };
     case SET_USER_DATA:
       return {
         userData: action.userData,
+        headsName: state.headsName,
         isLoadingProfile: action.isLoadingProfile,
       };
     case SET_HEADS_NAME:
       return {
+        userData: state.userData,
         headsName: action.headsName,
         isLoadingProfile: action.isLoadingProfile,
       };

@@ -19,3 +19,7 @@ export const DELETE_DEPARTMENT = 'delete_department';
 export const EDIT_DEPARTMENT = 'edit_department';
 export const SET_DEPARTMENT_INFO = 'set_department_info';
 export const IS_LOADING_DEPARTMENT_INFO = 'is_loading_department_info';
+
+//employees_actions
+export const SET_EMPLOYEE_LIST = 'set_employee_list';
+export const IS_LOADING_EMPLOYEES = 'is_loading_employees';

@@ -9,9 +9,8 @@ import com.example.company.payload.UserResponse;
 import com.example.company.repository.UserRepository;
 import com.example.company.security.CurrentUser;
 import com.example.company.security.UserPrincipal;
-import org.modelmapper.Converter;
+
 import org.modelmapper.ModelMapper;
-import org.modelmapper.spi.MappingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,7 @@ public class UserController {
 
         UserProfile userProfile = new UserProfile(user.getFirstName(), user.getLastName(),
                 user.getEmail(), user.getBusinessPhone() , user.getPrivatePhone(), user.getDateOfEmployment(), user.isAccountActive(),
-                user.getLastLogged(), user.getDepartment().getDepartmentName());
+                user.getLastLogged());
 
         return userProfile;
     }
@@ -68,4 +67,5 @@ public class UserController {
         List<User> heads = userRepository.findAllByRolesName(RoleName.ROLE_HEAD);
         return heads.stream().map(head -> convertToDto(head)).collect(Collectors.toList());
     }
+
 }

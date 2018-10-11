@@ -22,7 +22,7 @@ public class CompanyApplication {
 	CommandLineRunner runner(){
 		return args -> {
 			System.out.println("Lista");
-			System.out.println(departmentService.getUsersSalaryData("51"));
+			System.out.println(departmentService.getEmployeesByDepartment("50"));
 		};
 	}*/
 }

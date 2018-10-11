@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteDepartment, editDepartment, getDepartmentList } from '../../actions/department_action';
 import { getHeadsNames } from "../../actions/user_action";
+import { getEmployeeList } from '../../actions/employee_action';
 import EditDepModal from './EditDepModal';
 import DepartmentInfo from './DepartmentInfo';
 import { Input, Table, Icon, Divider, Button, Popconfirm } from 'antd';
@@ -42,6 +43,10 @@ class DepTable extends React.Component {
       return null;
     }
   };
+
+  handleEmployees(id) {
+    this.props.getEmployeeList(id);
+  }
 
   handleEdit(id) {
     this.setState({
@@ -176,7 +181,7 @@ class DepTable extends React.Component {
         width: '20%',
         render: (text, record) => (
           <div>
-            <Button size={'small'}>
+            <Button size={'small'} onClick={() => this.handleEmployees(record.id)}  >
               {`View `}
               <Icon type='solution'/>
             </Button>
@@ -230,4 +235,4 @@ const mapStateToProps = (state) => ({
   heads: state.user.headsName,
 });
 
-export default connect(mapStateToProps, { deleteDepartment, editDepartment, getDepartmentList, getHeadsNames })(DepTable);
+export default connect(mapStateToProps, { deleteDepartment, editDepartment, getDepartmentList, getHeadsNames, getEmployeeList })(DepTable);

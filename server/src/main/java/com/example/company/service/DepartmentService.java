@@ -1,10 +1,9 @@
 package com.example.company.service;
 
+import com.example.company.exception.AppException;
 import com.example.company.model.Department;
-import com.example.company.payload.ApiResponse;
-import com.example.company.payload.DepartmentInfo;
-import com.example.company.payload.DepartmentRequest;
-import com.example.company.payload.DepartmentResponse;
+import com.example.company.model.User;
+import com.example.company.payload.*;
 import com.example.company.repository.DepartmentRepository;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.math.BigDecimal;
@@ -33,9 +33,14 @@ public class DepartmentService {
     @Autowired
     private ModelMapper modelMapper;
 
-    private DepartmentResponse convertToDto(Department department) {
+    private DepartmentResponse convertDepartmentToDto(Department department) {
         DepartmentResponse departmentResponse = modelMapper.map(department, DepartmentResponse.class);
         return departmentResponse;
+    }
+
+    private UserProfile convertUserToDto(User user) {
+        UserProfile userProfile = modelMapper.map(user, UserProfile.class);
+        return userProfile;
     }
 
     private Sort sortByNameAsc() {
@@ -52,7 +57,7 @@ public class DepartmentService {
             return new ArrayList<>(Collections.emptyList());
         }
 
-        return departments.stream().map(department -> convertToDto(department)).collect(Collectors.toList());
+        return departments.stream().map(department -> convertDepartmentToDto(department)).collect(Collectors.toList());
     }
 
 
@@ -143,4 +148,17 @@ public class DepartmentService {
         return ResponseEntity.ok(new DepartmentInfo(numberOfUsers.longValue(), listOfSalaries, averageSalary, medianSalary));
     }
 
+    
+    public ResponseEntity<?> getEmployeesByDepartment(String id) {
+        Long idLong = Long.parseLong(id);
+
+        List<User> users = departmentRepository.getUsersByDepartment(idLong);
+        users.removeAll(Collections.singleton(null));
+        if(CollectionUtils.isEmpty(users)) {
+            return new ResponseEntity<>(new ApiResponse(false, "Department does not have registered employees!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        return ResponseEntity.ok(new ArrayList<>(users.stream().map(user -> convertUserToDto(user)).collect(Collectors.toList())));
+    }
 }

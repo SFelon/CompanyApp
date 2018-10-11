@@ -1,6 +1,7 @@
 package com.example.company.repository;
 
 import com.example.company.model.Department;
+import com.example.company.model.User;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,6 +27,9 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
     @Query("SELECT u.salary FROM Department d LEFT JOIN User u ON d.id = u.department.id WHERE d.id = (:id) GROUP BY u.id")
     List<BigDecimal> getUsersSalaryByDepartment(@Param("id") Long id);
+
+    @Query("SELECT u FROM Department d LEFT JOIN User u ON d.id = u.department.id WHERE d.id = (:id) GROUP BY u.id")
+    List<User> getUsersByDepartment(@Param("id") Long id);
 
     Boolean existsByDepartmentName(String departmentName);
 }

@@ -12,13 +12,12 @@ public class UserProfile {
     private Date dateOfEmployment;
     private boolean isAccountActive;
     private Date lastLogged;
-    private String departmentName;
 
     public UserProfile() {
     }
 
     public UserProfile(String firstName, String lastName, String email, String privatePhone, String businessPhone,
-                       Date dateOfEmployment, boolean isAccountActive, Date lastLogged, String departmentName) {
+                       Date dateOfEmployment, boolean isAccountActive, Date lastLogged) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -27,7 +26,6 @@ public class UserProfile {
         this.dateOfEmployment = dateOfEmployment;
         this.isAccountActive = isAccountActive;
         this.lastLogged = lastLogged;
-        this.departmentName = departmentName;
     }
 
     public String getFirstName() {
@@ -94,11 +92,4 @@ public class UserProfile {
         this.lastLogged = lastLogged;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
 }
