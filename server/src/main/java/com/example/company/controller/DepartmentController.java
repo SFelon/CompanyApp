@@ -43,12 +43,18 @@ public class DepartmentController {
     @PreAuthorize("hasRole('ROLE_CEO')")
     public ResponseEntity<?> updateDepartment(@PathVariable("id") String id,
                                               @RequestBody DepartmentRequest departmentRequest) {
-        return departmentService.deleteDepartment(id);
+        return departmentService.updateDepartment(id, departmentRequest);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_CEO')")
     public ResponseEntity<?> deleteDepartment(@PathVariable("id") String id) {
         return departmentService.deleteDepartment(id);
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_CEO','ROLE_HEAD')")
+    public ResponseEntity<?> get(@PathVariable("id") String id) {
+        return departmentService.getUsersSalaryData(id);
     }
 }

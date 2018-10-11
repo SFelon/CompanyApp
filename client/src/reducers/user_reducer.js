@@ -1,8 +1,8 @@
-import { 
+import {
   IS_LOADING_PROFILE,
   LOGOUT_USER,
   SET_USER_DATA,
-  SET_HEADS_NAME, 
+  SET_HEADS_NAME,
 } from '../constants';
 
 const initialState = {

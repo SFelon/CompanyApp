@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Collections;
 
@@ -101,6 +102,8 @@ public class AuthController {
         Generally, a good encoding algorithm applies a SHA-1 or greater hash combined with an 8-byte or greater
         randomly generated salt.*/
 
+        user.setSalary(BigDecimal.valueOf(500));
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Department userDepartment = departmentRepository.findByDepartmentName(signUpRequest.getDepartmentName())
@@ -108,7 +111,7 @@ public class AuthController {
 
         user.setDepartment(userDepartment);
 
-        Role userRole = roleRepository.findByName(RoleName.ROLE_CEO)
+        Role userRole = roleRepository.findByName(RoleName.ROLE_EMPLOYEE)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         /*

@@ -33,19 +33,20 @@ class App extends Component {
         return {
           role: role,
         };
-      };
-    };
+      }
+    }
     return null;
   };
 
   render() {
     if (this.props.isLoading) {
       return <LoadingIndicator />;
-    };
+    }
 
     return (
       <Layout className="app-container">
-        <AppHeader isAuthenticated={this.props.isAuthenticated} 
+        <AppHeader
+        isAuthenticated={this.props.isAuthenticated}
         currentUser={this.props.currentUser} 
         />
         <Content className="app-content">
@@ -57,7 +58,8 @@ class App extends Component {
               <Route
                 exact path="/"
                 render={() => !this.props.isAuthenticated ?
-                  <Login/> :
+                  <Login/>
+                  :
                   <Redirect from='/' to={`/${this.state.role}`} />
                 }/>
               <Route component={NotFound} />
@@ -65,9 +67,9 @@ class App extends Component {
           </div>
         </Content>
       </Layout>
-    );
+    )
   };
-};
+}
 
 const mapStateToProps = (state) => ({
   currentUser: state.auth.currentUser,

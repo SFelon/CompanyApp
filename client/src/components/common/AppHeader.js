@@ -12,7 +12,9 @@ const Header = Layout.Header;
 class AppHeader extends Component {
   constructor(props) {
     super(props);
-    this.state = { visible: false }
+    this.state = {
+      visible: false,
+    }
   };
 
   handleClick = (e) => {
@@ -86,6 +88,7 @@ class AppHeader extends Component {
               mode='horizontal'
               style={{lineHeight: '64px', float: 'right'}}
               onClick={this.handleClick}
+              selectedKeys={[]}
             >
               <SubMenu title={<span><Icon type='setting'/> User </span>}>
                 <MenuItemGroup title={

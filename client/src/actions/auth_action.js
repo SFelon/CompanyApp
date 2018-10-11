@@ -35,20 +35,20 @@ function setCurrentUser(currentUser) {
     isAuthenticated: true,
     isLoading: false,
   };
-};
+}
 
 function logoutUser() {
   return {
     type: LOGOUT_USER,
   };
-};
+}
 
 function loadingUser(toggle) {
   return {
     type: IS_LOADING,
     isLoading: toggle,
   };
-};
+}
 
 export function getCurrentUser() {
   return (dispatch) => {
@@ -69,7 +69,7 @@ export function getCurrentUser() {
       });
     });
   };
-};
+}
 
 export function signInAction(loginRequest) {
   return (dispatch) => {
@@ -97,7 +97,7 @@ export function signInAction(loginRequest) {
         }
       });
   };
-};
+}
 
 export function logoutAction() {
   return (dispatch) => {
@@ -106,6 +106,6 @@ export function logoutAction() {
     setTimeout(notification.success({
       message: 'Company App',
       description: 'You are successfully logged out.',
-    }), 500)
+    }), 500);
   };
-};
+}

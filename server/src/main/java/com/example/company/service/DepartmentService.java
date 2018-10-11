@@ -2,6 +2,7 @@ package com.example.company.service;
 
 import com.example.company.model.Department;
 import com.example.company.payload.ApiResponse;
+import com.example.company.payload.DepartmentInfo;
 import com.example.company.payload.DepartmentRequest;
 import com.example.company.payload.DepartmentResponse;
 import com.example.company.repository.DepartmentRepository;
@@ -15,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,14 +44,17 @@ public class DepartmentService {
 
     private static final Logger logger = LoggerFactory.getLogger(DepartmentService.class);
 
+
     public List<DepartmentResponse> getAllDepartments() {
         List<Department> departments = departmentRepository.findAll(sortByNameAsc());
 
         if(departments.size() == 0) {
             return new ArrayList<>(Collections.emptyList());
         }
+
         return departments.stream().map(department -> convertToDto(department)).collect(Collectors.toList());
     }
+
 
     public ResponseEntity<?> addNewDepartment(DepartmentRequest departmentRequest) {
         if(departmentRepository.existsByDepartmentName(departmentRequest.getDepartmentName())) {
@@ -107,4 +113,34 @@ public class DepartmentService {
         return new ResponseEntity<>(new ApiResponse(true, "Department deleted successfully!"),
                 HttpStatus.OK);
     }
+
+    public ResponseEntity<?> getUsersSalaryData(String id) {
+
+        Long idLong = Long.parseLong(id);
+        if(!departmentRepository.existsById(idLong)) {
+            return new ResponseEntity<>(new ApiResponse(false, "Department with set id does not exist!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        BigDecimal numberOfUsers = BigDecimal.valueOf(departmentRepository.countUsersByDepartmentId(idLong));
+
+        if(numberOfUsers == null || numberOfUsers.longValue() == 0 ) {
+            return ResponseEntity.ok(new DepartmentInfo(Long.valueOf(0), Collections.emptyList(), BigDecimal.valueOf(0),
+                    BigDecimal.valueOf(0)));
+        }
+
+        List<BigDecimal> listOfSalaries = departmentRepository.getUsersSalaryByDepartment(idLong);
+        BigDecimal sumOfSalaries = listOfSalaries.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal averageSalary = sumOfSalaries.divide(numberOfUsers, RoundingMode.CEILING);
+
+        Collections.sort(listOfSalaries);
+        BigDecimal medianSalary = listOfSalaries.get(listOfSalaries.size()/2);
+        if (listOfSalaries.size() % 2 == 0) {
+            medianSalary = (medianSalary.add(listOfSalaries.get(listOfSalaries.size()/2 - 1)))
+                    .divide(BigDecimal.valueOf(2), RoundingMode.CEILING);
+        }
+
+        return ResponseEntity.ok(new DepartmentInfo(numberOfUsers.longValue(), listOfSalaries, averageSalary, medianSalary));
+    }
+
 }

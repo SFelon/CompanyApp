@@ -1,10 +1,10 @@
-import { 
-    IS_LOADING_DEPARTMENT, 
-    LOGOUT_USER,
-    SET_DEPARTMENT_LIST,
-    ADD_NEW_DEPARTMENT,
-    DELETE_DEPARTMENT,
-    EDIT_DEPARTMENT,
+import {
+  IS_LOADING_DEPARTMENT,
+  LOGOUT_USER,
+  SET_DEPARTMENT_LIST,
+  ADD_NEW_DEPARTMENT,
+  DELETE_DEPARTMENT,
+  EDIT_DEPARTMENT,
 } from '../constants';
 
 const initialState = {
@@ -31,28 +31,30 @@ export default (state = initialState, action) => {
         {
           departments: state.departments.concat(action.newDepartment),
           isLoadingDepartments: action.isLoadingDepartments,
-        }
+        },
         );
     case DELETE_DEPARTMENT:
       return {
         departments: state.departments.filter(({ id }) => id !== action.id),
         isLoadingDepartments: action.isLoadingDepartments,
-        };
+      };
     case EDIT_DEPARTMENT:
-        return {
-        department: state.departments.map((department) => {
-            if (department.id === action.id) {
+      return {
+        departments: state.departments.map(department => {
+          if (department.id === action.id) {
             return {
-                ...state.departments,
-                ...action.editedDepartment,
-            }};
-            return state.departments;
+              ...department,
+              ...action.editedDepartment,
+            };
+          } else {
+            return department;
+          }
         }),
         isLoadingDepartments: action.isLoadingDepartments,
-        };
+      };
     case LOGOUT_USER:
       return initialState;
     default:
       return state;
-  };
+  }
 };

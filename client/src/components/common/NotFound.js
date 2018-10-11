@@ -16,7 +16,7 @@ class NotFound extends Component {
         <Link to="/"><Button className="go-back-btn" type="primary" size="large">Go Back</Button></Link>
       </div>
     );
-  };
-};
+  }
+}
 
 export default NotFound;

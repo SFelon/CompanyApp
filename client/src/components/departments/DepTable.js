@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteDepartment, editDepartment } from '../../actions/department_action';
+import { deleteDepartment, editDepartment, getDepartmentList } from '../../actions/department_action';
+import { getHeadsNames } from "../../actions/user_action";
 import EditDepModal from './EditDepModal';
+import DepartmentInfo from './DepartmentInfo';
 import { Input, Table, Icon, Divider, Button, Popconfirm } from 'antd';
 import './DepTable.css'
-
 
 class DepTable extends React.Component {
   constructor(props) {
@@ -14,16 +15,32 @@ class DepTable extends React.Component {
       searchText:'',
       prevDepartments: [],
       editDepartmentData: {},
+      visible: false,
+      data: [],
+      prevHeads: [],
     };
   };
 
   static getDerivedStateFromProps(props, state) {
-    if (props.departments && props.departments.length !== state.prevDepartments.length) {
+    if (props.departments && props.departments.length !== state.prevDepartments.length
+      && state.editDepartmentData) {
       return {
         prevDepartments: props.departments,
+      }
+    }
+    if (props.heads && props.heads !== state.prevHeads) {
+      let names = props.heads.map((element) => ({
+        text: element.firstName + " " + element.lastName,
+        value: element.username,
+      }));
+      return {
+        data: names,
+        prevHeads: props.heads,
       };
-    };
-    return null;
+    }
+    else {
+      return null;
+    }
   };
 
   handleEdit(id) {
@@ -33,8 +50,9 @@ class DepTable extends React.Component {
     this.showModal();
   };
 
-  showModal = () => {
+  showModal() {
     this.setState({ visible: true });
+    this.props.getHeadsNames();
   };
 
   handleCancel = () => {
@@ -54,10 +72,9 @@ class DepTable extends React.Component {
         return;
       }
       const editDepRequest = Object.assign({}, values);
-      this.props.editDepartment(editDepRequest);
+      this.props.editDepartment(editDepRequest, this.state.editDepartmentData.id);
       form.resetFields();
       this.setState({ visible: false });
-      //this.props.getDepartmentList();
     });
   };
 
@@ -84,6 +101,7 @@ class DepTable extends React.Component {
   handleDelete(id) {
     this.props.deleteDepartment({id});
   };
+
 
   render() {
     let { sortedInfo } = this.state;
@@ -157,7 +175,7 @@ class DepTable extends React.Component {
         key: 'action',
         width: '20%',
         render: (text, record) => (
-          <span>
+          <div>
             <Button size={'small'}>
               {`View `}
               <Icon type='solution'/>
@@ -170,19 +188,29 @@ class DepTable extends React.Component {
             <Divider type='vertical' />
             <Popconfirm title='Sure to delete?' onConfirm={() => this.handleDelete(record.id)}>
               <Button size={'small'}>
-                {`Delete `}
+                {`Delete`}
                 <Icon type='delete'/>
               </Button>
             </Popconfirm>
-          </span>
+          </div>
         ),
       }
     ];
 
   if(this.props.departments && this.props.departments.length > 0) {
+
     return (
       <div>
-        <Table columns={columns} dataSource={this.state.prevDepartments} rowKey={record => record.departmentName} onChange={this.handleChange} size='small'/>
+        <Table
+          columns={columns}
+          dataSource={this.state.prevDepartments}
+          rowKey={record => record.departmentName}
+          onChange={this.handleChange} size='small'
+          expandedRowRender={ (record) => {
+             return <DepartmentInfo departmentId={record.id} />
+            }
+          }
+        />
         <EditDepModal editDepartmentData={this.state.editDepartmentData}
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
@@ -193,12 +221,13 @@ class DepTable extends React.Component {
     );
   } else {
     return null;
-  };
+  }
 };
-};
+}
 
 const mapStateToProps = (state) => ({
   departments: state.departments.departments,
+  heads: state.user.headsName,
 });
 
-export default connect(mapStateToProps, { deleteDepartment, editDepartment })(DepTable);
+export default connect(mapStateToProps, { deleteDepartment, editDepartment, getDepartmentList, getHeadsNames })(DepTable);

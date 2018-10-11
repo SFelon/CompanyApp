@@ -10,6 +10,16 @@ import { Col, Row, Card, Icon, Skeleton, Tooltip} from 'antd';
 class CEO_Dashboard extends Component {
   state = {
     visible: false,
+    numberOfDepartments: this.props.numberOfDepartments || 0,
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.numberOfDepartments && props.numberOfDepartments !== state.numberOfDepartments) {
+      return {
+        numberOfDepartments: props.numberOfDepartments,
+      };
+    }
+    return 0;
   };
 
   showModal = () => {
@@ -36,8 +46,8 @@ class CEO_Dashboard extends Component {
       const addDepRequest = Object.assign({}, values);
       this.props.addDepartment(addDepRequest);
       form.resetFields();
-      this.setState({ visible: false });
       this.props.getDepartmentList();
+      this.setState({ visible: false });
     });
   };
 
@@ -72,7 +82,7 @@ class CEO_Dashboard extends Component {
                   </Tooltip>,
                 ]}
             >
-              {`No of departments: ${this.props.departments.length}`}
+              {`No of departments: ${this.state.numberOfDepartments}`}
             </Card>
             <br></br>
             <Card title={<span><Icon type='team' style={{ padding: '0 8px', fontSize: '32px'}}/> Users</span>}
@@ -99,6 +109,7 @@ class CEO_Dashboard extends Component {
 
 const mapStateToProps = (state) => ({
   departments: state.departments.departments,
+  numberOfDepartments: state.departments.departments.length,
   isLoading: state.departments.isLoadingDepartments,
 });
 
