@@ -2,7 +2,7 @@ import {
   IS_LOADING_DEPARTMENT_INFO,
   LOGOUT_USER,
   SET_DEPARTMENT_INFO,
-} from '../constants';
+} from '../constants/index';
 
 const initialState = {
   departmentInfo: [],

@@ -58,11 +58,4 @@ public class DepartmentController {
         return departmentService.getUsersSalaryData(id);
     }
 
-    @GetMapping("/{id}/employees")
-    @PreAuthorize("hasAnyRole('ROLE_CEO','ROLE_HEAD','ROLE_EMPLOYEE')")
-    public ResponseEntity<?> getEmployeesByDepartment(@PathVariable("id") String id) {
-        return departmentService.getEmployeesByDepartment(id);
-    }
-
-
 }

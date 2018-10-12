@@ -7,7 +7,7 @@ import {
   Icon,
   Input,
 } from 'antd';
-import { signInAction, getCurrentUser } from '../../actions/auth_action';
+import { signInAction, getCurrentUser } from '../../store/actions/auth_action';
 
 const FormItem = Form.Item;
 

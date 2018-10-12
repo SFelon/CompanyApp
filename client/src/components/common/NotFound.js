@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import './NotFound.css';
+import '../../styles/components/NotFound.css';
 
 class NotFound extends Component {
   render() {

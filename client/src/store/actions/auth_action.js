@@ -5,7 +5,7 @@ import {
   API_BASE_URL,
   SET_CURRENT_USER,
   LOGOUT_USER,
-} from '../constants';
+} from '../constants/index';
 
 const request = (options) => {
   const headers = new Headers({

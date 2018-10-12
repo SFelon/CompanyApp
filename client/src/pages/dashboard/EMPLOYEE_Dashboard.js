@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getDepartmentList } from '../../actions/department_action';
+import { getDepartmentList } from '../../store/actions/department_action';
 import { Col, Row, Card, Icon, Skeleton} from 'antd';
-import DepTable from '../departments/DepTable';
+import DepTable from '../../components/departments/DepTable';
 
 class EMPLOYEE_Dashboard extends Component {
   getDepartments = () => {

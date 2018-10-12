@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'antd';
-import LoginForm from './LoginForm';
+import LoginForm from '../../components/login-form/LoginForm';
 import '../../styles/components/Login.css';
 
 class Login extends Component {

@@ -9,7 +9,7 @@ import {
   EDIT_DEPARTMENT,
   SET_DEPARTMENT_INFO,
   IS_LOADING_DEPARTMENT_INFO,
-} from '../constants';
+} from '../constants/index';
 
 const request = (options) => {
   const headers = new Headers({

@@ -38,11 +38,6 @@ public class DepartmentService {
         return departmentResponse;
     }
 
-    private UserProfile convertUserToDto(User user) {
-        UserProfile userProfile = modelMapper.map(user, UserProfile.class);
-        return userProfile;
-    }
-
     private Sort sortByNameAsc() {
         return new Sort(Sort.Direction.ASC, "departmentName");
     }
@@ -146,19 +141,5 @@ public class DepartmentService {
         }
 
         return ResponseEntity.ok(new DepartmentInfo(numberOfUsers.longValue(), listOfSalaries, averageSalary, medianSalary));
-    }
-
-    
-    public ResponseEntity<?> getEmployeesByDepartment(String id) {
-        Long idLong = Long.parseLong(id);
-
-        List<User> users = departmentRepository.getUsersByDepartment(idLong);
-        users.removeAll(Collections.singleton(null));
-        if(CollectionUtils.isEmpty(users)) {
-            return new ResponseEntity<>(new ApiResponse(false, "Department does not have registered employees!"),
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        return ResponseEntity.ok(new ArrayList<>(users.stream().map(user -> convertUserToDto(user)).collect(Collectors.toList())));
     }
 }

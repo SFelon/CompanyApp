@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { getDepartmentInfo } from '../../actions/department_action';
+import { getDepartmentInfo } from '../../store/actions/department_action';
 import { Icon } from 'antd';
 
 class DepartmentInfo extends Component {

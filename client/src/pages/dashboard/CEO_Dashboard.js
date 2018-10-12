@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getDepartmentList, addDepartment } from '../../actions/department_action';
-import { getHeadsNames } from "../../actions/user_action";
-import DepTable from '../departments/DepTable';
-import AddDepModal from '../departments/AddDepModal';
+import { getDepartmentList, addDepartment } from '../../store/actions/department_action';
+import { getHeadsNames } from "../../store/actions/user_action";
+import { getEmployeeList } from "../../store/actions/employee_action";
+import DepTable from '../../components/departments/DepTable';
+import EmployeeTable from '../../components/employees/EmployeeTable';
+import AddDepModal from '../../components/departments/AddDepModal';
 import { Col, Row, Card, Icon, Skeleton, Tooltip} from 'antd';
 
 class CEO_Dashboard extends Component {
   state = {
     visible: false,
     numberOfDepartments: this.props.numberOfDepartments || 0,
+    departmentTable: true,
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -57,7 +60,17 @@ class CEO_Dashboard extends Component {
 
   getDepartments = () => {
     this.props.getDepartmentList();
+    this.setState({
+      departmentTable: true,
+    });
   };
+
+  handleEmployeesListByDepartment = (id) => {
+    this.props.getEmployeeList(id);
+    this.setState({
+      departmentTable: false,
+    });
+  }
 
   render() {
     return (
@@ -65,7 +78,11 @@ class CEO_Dashboard extends Component {
         <Row gutter={16}>
           <Col span={18}>
             <Skeleton loading={this.props.isLoading}>
-              <DepTable />
+              {this.state.departmentTable ? (
+                <DepTable onClickGetEmployeeList={this.handleEmployeesListByDepartment}/>
+              ) : (
+                <EmployeeTable />
+              )}
             </Skeleton>
           </Col>
           <Col span={6}>
@@ -85,10 +102,10 @@ class CEO_Dashboard extends Component {
               {`No of departments: ${this.state.numberOfDepartments}`}
             </Card>
             <br></br>
-            <Card title={<span><Icon type='team' style={{ padding: '0 8px', fontSize: '32px'}}/> Users</span>}
-                  actions={[
-                  <Icon type="ordered-list" />, 
-                  <Icon type="edit" /> ]}
+            <Card title={<span><Icon type='team' style={{ padding: '0 8px', fontSize: '32px'}}/> Employees</span>}
+              actions={[
+              <Icon type="ordered-list" />,
+              ]}
             >
               Card content
             </Card>
@@ -113,4 +130,4 @@ const mapStateToProps = (state) => ({
   isLoading: state.departments.isLoadingDepartments,
 });
 
-export default withRouter(connect(mapStateToProps, { getDepartmentList , getHeadsNames, addDepartment })(CEO_Dashboard));
+export default withRouter(connect(mapStateToProps, { getDepartmentList, getHeadsNames, addDepartment, getEmployeeList })(CEO_Dashboard));

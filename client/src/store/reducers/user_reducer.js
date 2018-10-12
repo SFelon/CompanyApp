@@ -3,7 +3,7 @@ import {
   LOGOUT_USER,
   SET_USER_DATA,
   SET_HEADS_NAME,
-} from '../constants';
+} from '../constants/index';
 
 const initialState = {
   userData: {

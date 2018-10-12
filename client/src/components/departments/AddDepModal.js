@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { getHeadsNames } from '../../actions/user_action';
+import { getHeadsNames } from '../../store/actions/user_action';
 import { Modal, Form, Input, Select, InputNumber } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;

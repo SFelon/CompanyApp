@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './App.css';
+import './styles/App.css';
 import {
   Route,
   Switch,
@@ -8,14 +8,14 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { Layout } from 'antd';
-import Login from '../components/login/Login';
-import AppHeader from '../components/common/AppHeader';
-import PrivateRoute from '../components/common/PrivateRoute';
-import LoadingIndicator from '../components/common/LoadingIndicator';
-import NotFound from '../components/common/NotFound';
-import CEO_Dashboard from '../components/dashboard/CEO_Dashboard';
-import HEAD_Dashboard from '../components/dashboard/HEAD_Dashboard';
-import EMPLOYEE_Dashboard from '../components/dashboard/EMPLOYEE_Dashboard';
+import Login from './pages/login/Login';
+import AppHeader from './components/common/AppHeader';
+import PrivateRoute from './components/common/PrivateRoute';
+import LoadingIndicator from './components/common/LoadingIndicator';
+import NotFound from './components/common/NotFound';
+import CEO_Dashboard from './pages/dashboard/CEO_Dashboard';
+import HEAD_Dashboard from './pages/dashboard/HEAD_Dashboard';
+import EMPLOYEE_Dashboard from './pages/dashboard/EMPLOYEE_Dashboard';
 
 const { Content } = Layout;
 
@@ -47,7 +47,7 @@ class App extends Component {
       <Layout className="app-container">
         <AppHeader
         isAuthenticated={this.props.isAuthenticated}
-        currentUser={this.props.currentUser} 
+        currentUser={this.props.currentUser}
         />
         <Content className="app-content">
           <div className="container">
@@ -58,10 +58,11 @@ class App extends Component {
               <Route
                 exact path="/"
                 render={() => !this.props.isAuthenticated ?
-                  <Login/>
+                  <Login />
                   :
-                  <Redirect from='/' to={`/${this.state.role}`} />
-                }/>
+                  <Redirect from="/" to={`/${this.state.role}`} />
+                }
+              />
               <Route component={NotFound} />
             </Switch>
           </div>
@@ -77,4 +78,4 @@ const mapStateToProps = (state) => ({
   isLoading: state.auth.isLoading,
 });
 
-export default withRouter(connect(mapStateToProps,null)(App));
+export default withRouter(connect(mapStateToProps, null)(App));

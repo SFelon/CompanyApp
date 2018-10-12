@@ -2,7 +2,7 @@ import {
   IS_LOADING_EMPLOYEES,
   SET_EMPLOYEE_LIST,
   LOGOUT_USER,
-} from '../constants';
+} from '../constants/index';
 
 const initialState = {
   employees: [],

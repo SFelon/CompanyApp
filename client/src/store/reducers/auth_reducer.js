@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, IS_LOADING, LOGOUT_USER } from '../constants';
+import { SET_CURRENT_USER, IS_LOADING, LOGOUT_USER } from '../constants/index';
 
 const initialState = {
   currentUser: null,

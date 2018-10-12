@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logoutAction } from '../../actions/auth_action';
-import { getUserProfile } from '../../actions/user_action';
+import { logoutAction } from '../../store/actions/auth_action';
+import { getUserProfile } from '../../store/actions/user_action';
 import { Menu, Icon, Layout, Avatar, Modal, Button } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;

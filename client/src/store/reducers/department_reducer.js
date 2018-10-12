@@ -5,7 +5,7 @@ import {
   ADD_NEW_DEPARTMENT,
   DELETE_DEPARTMENT,
   EDIT_DEPARTMENT,
-} from '../constants';
+} from '../constants/index';
 
 const initialState = {
     departments: [],

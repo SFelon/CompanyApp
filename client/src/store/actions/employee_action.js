@@ -4,7 +4,7 @@ import {
   API_BASE_URL,
   SET_EMPLOYEE_LIST,
   IS_LOADING_EMPLOYEES,
-} from '../constants';
+} from '../constants/index';
 
 const request = (options) => {
   const headers = new Headers({
